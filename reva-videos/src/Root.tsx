@@ -4,7 +4,7 @@ import { detectMusic } from "./reva/ui/Effects";
 
 // REVA · videos para Instagram (1080x1920, 30 fps)
 // Los textos se cambian aquí (defaultProps) o en el panel "Props" de Remotion Studio.
-// *palabra* = verde hoja · _palabra_ = azul vidrio
+// *palabra* = verde hoja · _palabra_ = azul vidrio · " | " = salto de línea
 export const RemotionRoot: React.FC = () => {
   return (
     <Folder name="REVA">
@@ -20,7 +20,7 @@ export const RemotionRoot: React.FC = () => {
         defaultProps={{
           caption1: "*30* bottles. Now what?",
           caption2: "Find a *REVA.*",
-          caption3: "*+10* *plastic* · _+15_ _glass_",
+          caption3: "*+10* *plastic* | _+15_ _glass_",
           bottlesNote: "30 BOTTLES LATER...",
           caption4: "*300* *pts* = 2-for-1 movie",
           slogan: "*Recycle.* Earn. _Transform._",

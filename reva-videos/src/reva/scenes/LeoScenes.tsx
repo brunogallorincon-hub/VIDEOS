@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, Easing, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
-import { C, anton, inter } from "../brand";
+import { C, SAFE_SIDE, anton, inter } from "../brand";
 import { Leo } from "../characters/Leo";
 import { Bottle, BottleKind } from "../characters/Bottle";
 import { MACHINE_VIEW, RevaMachine } from "../characters/RevaMachine";
@@ -39,7 +39,7 @@ export const RoomScene: React.FC<{ caption: string }> = ({ caption }) => {
               key={i}
               style={{
                 position: "absolute",
-                left: b.x - (size * 80) / 180 / 2,
+                left: b.x - 40 - (size * 80) / 180 / 2,
                 top: GROUND_Y - size - b.row * 140 + 6,
                 translate: `0 ${(1 - s) * -900}px`,
                 rotate: `${((i * 37) % 17) - 8}deg`,
@@ -53,13 +53,13 @@ export const RoomScene: React.FC<{ caption: string }> = ({ caption }) => {
           pose="idle"
           expression={frame < 26 ? "neutral" : "surprised"}
           height={760}
-          style={{ position: "absolute", left: 70, top: GROUND_Y - 760 }}
+          style={{ position: "absolute", left: SAFE_SIDE, top: GROUND_Y - 760 }}
         />
         {/* signo de pregunta sobre Leo */}
         <div
           style={{
             position: "absolute",
-            left: 360,
+            left: 400,
             top: 640,
             fontFamily: anton,
             fontSize: 150,
@@ -90,7 +90,7 @@ export const WalkScene: React.FC<{ caption: string }> = ({ caption }) => {
   return (
     <AbsoluteFill>
       <Campus scroll={scroll} />
-      <div style={{ position: "absolute", left: 1360 - scroll, top: GROUND_Y - machineH }}>
+      <div style={{ position: "absolute", left: 1306 - scroll, top: GROUND_Y - machineH }}>
         <RevaMachine height={machineH} screenText="REVA" glowPlastic={arrived ? 0.5 + 0.5 * Math.sin(frame / 4) : 0} />
         {/* pin de ubicación */}
         <div
@@ -118,7 +118,7 @@ export const WalkScene: React.FC<{ caption: string }> = ({ caption }) => {
         expression={arrived ? "happy" : "neutral"}
         holding="bag"
         height={700}
-        style={{ position: "absolute", left: 110, top: GROUND_Y - 700 }}
+        style={{ position: "absolute", left: SAFE_SIDE, top: GROUND_Y - 700 }}
       />
       <Caption text={caption} />
       <Sfx at={0} kind="whoosh" volume={0.5} />
@@ -130,11 +130,11 @@ export const WalkScene: React.FC<{ caption: string }> = ({ caption }) => {
 // ===================== Escena 3 · Meter botellas (7–11 s) =====================
 const M_H = 980;
 const M_SCALE = M_H / MACHINE_VIEW.h;
-const M_LEFT = 540;
+const M_LEFT = 1080 - SAFE_SIDE + 20 - (M_H * MACHINE_VIEW.w) / MACHINE_VIEW.h; // borde der. ~90 px
 const M_TOP = GROUND_Y + 10 - M_H;
 const SLOT_X = M_LEFT + MACHINE_VIEW.slotX * M_SCALE;
 const SLOT_Y = { plastic: M_TOP + MACHINE_VIEW.plasticY * M_SCALE, glass: M_TOP + MACHINE_VIEW.glassY * M_SCALE };
-const HAND = { x: 410, y: 1010 }; // mano de Leo al soltar la botella
+const HAND = { x: 460, y: 1010 }; // mano de Leo al soltar la botella
 const FLIGHT = 14;
 const THROWS: { at: number; kind: BottleKind; pts: number }[] = [
   { at: 14, kind: "plastic", pts: 10 },
@@ -195,13 +195,13 @@ export const InsertScene: React.FC<{ caption: string; bottlesNote: string }> = (
         throwStart={1}
         throwPeriod={30}
         height={720}
-        style={{ position: "absolute", left: 40, top: GROUND_Y - 720 }}
+        style={{ position: "absolute", left: 90, top: GROUND_Y - 720 }}
       />
       {THROWS.map((t, i) => (
         <FlyingBottle key={i} at={t.at} kind={t.kind} />
       ))}
       {/* marcador de puntos 0 → 300 */}
-      <div style={{ position: "absolute", left: 60, top: 560, display: "flex", flexDirection: "column", gap: 16, alignItems: "flex-start" }}>
+      <div style={{ position: "absolute", left: SAFE_SIDE, top: 560, display: "flex", flexDirection: "column", gap: 16, alignItems: "flex-start" }}>
         <PointsCounter
           fontSize={100}
           steps={[

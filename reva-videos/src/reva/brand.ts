@@ -39,6 +39,9 @@ export const H = 1920;
 export const FPS = 30;
 export const SAFE_TOP = Math.round(H * 0.12); // keep top 12% clear (230 px)
 export const SAFE_BOTTOM = Math.round(H * 0.8); // nothing important below 1536 px
+// Side margin for captions and UI. 110 px (not just 60) so nothing gets cut when a
+// phone/iPad player zooms the 9:16 video to fill a taller screen (~100 px lost per side).
+export const SAFE_SIDE = 110;
 
 // ---------- REVA facts ----------
 export const REVA = {
