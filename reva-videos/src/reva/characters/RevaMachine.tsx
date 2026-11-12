@@ -1,5 +1,5 @@
 import React from "react";
-import { C, anton, inter } from "../theme";
+import { C, anton, inter } from "../brand";
 
 type Props = {
   /** Alto en px. */

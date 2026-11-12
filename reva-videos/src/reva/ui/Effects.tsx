@@ -1,7 +1,7 @@
 import React from "react";
 import { Audio } from "@remotion/media";
 import { AbsoluteFill, Sequence, interpolate, random, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
-import { C } from "../theme";
+import { C } from "../brand";
 
 // ---------- Sonido ----------
 // public/audio/pop.wav, ding.wav y whoosh.wav se generaron por código (sin derechos).

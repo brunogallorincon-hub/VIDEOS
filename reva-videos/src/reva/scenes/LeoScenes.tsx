@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, Easing, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
-import { C, anton, inter } from "../theme";
+import { C, anton, inter } from "../brand";
 import { Leo } from "../characters/Leo";
 import { Bottle, BottleKind } from "../characters/Bottle";
 import { MACHINE_VIEW, RevaMachine } from "../characters/RevaMachine";

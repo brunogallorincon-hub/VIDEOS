@@ -24,6 +24,7 @@ export const RemotionRoot: React.FC = () => {
           bottlesNote: "30 BOTTLES LATER...",
           caption4: "*300* *pts* = 2-for-1 movie",
           slogan: "*Recycle.* Earn. _Transform._",
+          website: "claude.ai/artifact/2wpJ9LccYNjjLB8xveKSXL",
           hasMusic: false,
         }}
       />

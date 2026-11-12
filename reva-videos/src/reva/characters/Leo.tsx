@@ -1,6 +1,6 @@
 import React from "react";
 import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
-import { C } from "../theme";
+import { C } from "../brand";
 
 export type LeoPose = "idle" | "walk" | "throw" | "celebrate";
 export type LeoExpression = "neutral" | "happy" | "surprised";

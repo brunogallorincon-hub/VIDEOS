@@ -1,6 +1,6 @@
 import React from "react";
 import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
-import { C, SAFE_TOP, anton } from "../theme";
+import { C, SAFE_TOP, anton } from "../brand";
 
 // Texto grande en Anton que entra palabra por palabra.
 // *palabra* = verde hoja (plástico) · _palabra_ = azul vidrio.

@@ -1,6 +1,6 @@
 import React from "react";
 import { Easing, interpolate, useCurrentFrame } from "remotion";
-import { C, anton, inter } from "../theme";
+import { C, anton, inter } from "../brand";
 
 // Marcador de puntos: el número sube con interpolate (ej. 120 → 130).
 // Admite varios tramos: steps = [{at: frame, value}] y va de uno a otro.

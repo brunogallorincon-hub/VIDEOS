@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill } from "remotion";
-import { C } from "../theme";
+import { C } from "../brand";
 
 export const GROUND_Y = 1500;
 

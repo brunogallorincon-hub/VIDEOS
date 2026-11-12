@@ -1,6 +1,6 @@
 import React from "react";
 import { useCurrentFrame } from "remotion";
-import { C } from "../theme";
+import { C } from "../brand";
 
 export type BottleKind = "plastic" | "glass";
 export type BottleMood = "neutral" | "happy" | "sad" | "surprised";

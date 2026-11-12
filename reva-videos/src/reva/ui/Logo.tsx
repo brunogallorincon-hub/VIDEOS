@@ -1,6 +1,6 @@
 import React from "react";
 import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
-import { C, anton } from "../theme";
+import { C, anton } from "../brand";
 
 // Hojita verde (también se usa en la máquina y como decoración).
 export const Leaf: React.FC<{ size: number; color?: string; style?: React.CSSProperties }> = ({
