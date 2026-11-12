@@ -6,10 +6,10 @@ import { Burst, Sfx } from "./Effects";
 
 // Cierre común de los 3 videos: logo REVA + lema (o la frase que le pases).
 // Palabras con *asteriscos* = verde, _guiones_ = azul vidrio.
-export const EndCard: React.FC<{ line?: string; subline?: string; website?: string }> = ({
+export const EndCard: React.FC<{ line?: string; subline?: string; cta?: string }> = ({
   line = "*Recycle.* Earn. _Transform._",
   subline,
-  website = REVA.websiteShort,
+  cta = REVA.linkCta,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -56,22 +56,23 @@ export const EndCard: React.FC<{ line?: string; subline?: string; website?: stri
             {subline}
           </div>
         ) : null}
-        {website ? (
+        {cta ? (
           <div
             style={{
               marginTop: 10,
               fontFamily: inter,
-              fontWeight: 600,
-              fontSize: 32,
+              fontWeight: 800,
+              fontSize: 40,
+              letterSpacing: 1,
               color: C.white,
               background: C.ink,
               border: `3px solid ${C.leaf}`,
               borderRadius: 40,
-              padding: "12px 28px",
+              padding: "14px 36px",
               opacity: spring({ frame: frame - 26, fps, config: { damping: 200 } }),
             }}
           >
-            {website}
+            {cta}
           </div>
         ) : null}
       </div>

@@ -1,15 +1,26 @@
 import React from "react";
-import { AbsoluteFill } from "remotion";
+import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { C } from "../brand";
 
 export const GROUND_Y = 1500;
 
 // Cuarto de Leo: pared, ventana, póster y piso.
-export const Room: React.FC = () => (
+const Cloud: React.FC<{ x: number; y: number; s: number }> = ({ x, y, s }) => (
+  <div style={{ position: "absolute", left: x, top: y, width: 120 * s, height: 50 * s }}>
+    <div style={{ position: "absolute", left: 0, top: 18 * s, width: 120 * s, height: 32 * s, borderRadius: 20 * s, background: C.white }} />
+    <div style={{ position: "absolute", left: 22 * s, top: 4 * s, width: 44 * s, height: 44 * s, borderRadius: "50%", background: C.white }} />
+    <div style={{ position: "absolute", left: 54 * s, top: -8 * s, width: 52 * s, height: 52 * s, borderRadius: "50%", background: C.white }} />
+  </div>
+);
+
+export const Room: React.FC = () => {
+  const frame = useCurrentFrame();
+  return (
   <AbsoluteFill style={{ backgroundColor: C.forest }}>
-    {/* ventana */}
-    <div style={{ position: "absolute", left: 640, top: 590, width: 320, height: 270, borderRadius: 24, background: C.forestDark, border: `12px solid ${C.white}` }}>
-      <div style={{ position: "absolute", left: 186, top: 40, width: 70, height: 70, borderRadius: "50%", background: C.glass, opacity: 0.85 }} />
+    {/* ventana: cielo azul con nubes que pasan */}
+    <div style={{ position: "absolute", left: 640, top: 590, width: 320, height: 270, borderRadius: 24, background: C.glass, border: `12px solid ${C.white}`, overflow: "hidden" }}>
+      <Cloud x={20 + frame * 0.6} y={60} s={1} />
+      <Cloud x={170 + frame * 0.35} y={150} s={0.7} />
       <div style={{ position: "absolute", left: 136, top: 0, width: 12, height: "100%", background: C.white }} />
     </div>
     {/* póster */}
@@ -21,7 +32,8 @@ export const Room: React.FC = () => (
     <div style={{ position: "absolute", left: 0, right: 0, top: GROUND_Y - 22, height: 14, background: C.forestLight }} />
     <div style={{ position: "absolute", left: 140, width: 800, top: GROUND_Y + 30, height: 70, borderRadius: "50%", background: C.forestLight, opacity: 0.7 }} />
   </AbsoluteFill>
-);
+  );
+};
 
 // Campus: edificios lejanos, árboles y banqueta. `scroll` = cuánto ha avanzado la cámara (px).
 export const Campus: React.FC<{ scroll?: number }> = ({ scroll = 0 }) => {

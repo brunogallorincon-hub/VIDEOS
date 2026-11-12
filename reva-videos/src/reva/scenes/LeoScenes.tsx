@@ -23,6 +23,9 @@ const PILE: { x: number; row: number; kind: BottleKind }[] = [
   { x: 760, row: 3, kind: "plastic" },
 ];
 
+// Las botellas aparecen a partir de esta altura (el título ocupa ~280–520 px).
+const PILE_START_Y = 580;
+
 export const RoomScene: React.FC<{ caption: string }> = ({ caption }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -34,14 +37,17 @@ export const RoomScene: React.FC<{ caption: string }> = ({ caption }) => {
         {PILE.map((b, i) => {
           const s = spring({ frame: frame - 2 - i * 1.5, fps, config: { damping: 11, stiffness: 150 } });
           const size = 170;
+          const finalTop = GROUND_Y - size - b.row * 140 + 6;
+          const startOffset = PILE_START_Y - finalTop; // negativo: empieza más arriba, pero debajo del título
           return (
             <div
               key={i}
               style={{
                 position: "absolute",
                 left: b.x - 40 - (size * 80) / 180 / 2,
-                top: GROUND_Y - size - b.row * 140 + 6,
-                translate: `0 ${(1 - s) * -900}px`,
+                top: finalTop,
+                translate: `0 ${(1 - s) * startOffset}px`,
+                opacity: interpolate(s, [0, 0.12], [0, 1], clamp),
                 rotate: `${((i * 37) % 17) - 8}deg`,
               }}
             >

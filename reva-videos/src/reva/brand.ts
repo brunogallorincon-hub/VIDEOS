@@ -48,9 +48,8 @@ export const REVA = {
   name: "REVA",
   what: "A recycling machine for a school project in Zacatecas, Mexico",
   slogan: "Recycle. Earn. Transform.",
-  website: "https://claude.ai/artifact/2wpJ9LccYNjjLB8xveKSXL",
-  // shown on screen without "https://"
-  websiteShort: "claude.ai/artifact/2wpJ9LccYNjjLB8xveKSXL",
+  // No URLs on screen: every end card says this instead.
+  linkCta: "Link in bio",
   pointsOnly: "Points only, never cash.",
   points: { plastic: 10, glass: 15 },
   rewards: [

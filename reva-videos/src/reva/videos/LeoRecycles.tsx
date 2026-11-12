@@ -18,7 +18,7 @@ export const leoRecyclesSchema = z.object({
   bottlesNote: z.string(),
   caption4: z.string(),
   slogan: z.string(),
-  website: z.string(),
+  endCta: z.string(),
   hasMusic: z.boolean(),
 });
 
@@ -48,7 +48,7 @@ export const LeoRecycles: React.FC<z.infer<typeof leoRecyclesSchema>> = (p) => (
       </TransitionSeries.Sequence>
       <TransitionSeries.Transition presentation={fade()} timing={linearTiming({ durationInFrames: T })} />
       <TransitionSeries.Sequence name="5 · Logo" durationInFrames={D.end}>
-        <EndCard line={p.slogan} website={p.website} />
+        <EndCard line={p.slogan} cta={p.endCta} />
       </TransitionSeries.Sequence>
     </TransitionSeries>
     <Music enabled={p.hasMusic} />
