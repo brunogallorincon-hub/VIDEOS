@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0D3B2E">
+<title>REVA Partner · Redeem</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--forest:#0D3B2E;--leaf:#5FD07A;--ink:#0A1812;--white:#F6F8F4;--glass:#8CC2EA;--red:#E25A4C}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--forest);color:var(--white);font-family:Inter,system-ui,sans-serif;display:flex;flex-direction:column;min-height:100dvh}
+header{display:flex;align-items:center;justify-content:space-between;padding:20px 22px}
+.logo{font-family:Anton,sans-serif;font-size:30px;letter-spacing:.02em;display:flex;align-items:center;gap:8px}
+.logo i{width:22px;height:12px;background:var(--leaf);border-radius:50%;transform:rotate(-35deg);display:inline-block}
+.tag{font-size:12px;font-weight:800;letter-spacing:.12em;background:var(--leaf);color:var(--ink);padding:6px 10px;border-radius:99px}
+main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 20px 40px;text-align:center}
+h1{font-family:Anton,sans-serif;font-weight:400;font-size:clamp(40px,11vw,72px);line-height:1;margin:0 0 8px}
+p.sub{margin:0 0 26px;color:#b9d6c8;font-size:16px}
+.box{width:100%;max-width:420px}
+.field{display:flex;align-items:center;background:var(--white);border-radius:18px;overflow:hidden;border:4px solid transparent;transition:border-color .2s}
+.field span{font-family:Anton,sans-serif;font-size:32px;color:var(--forest);padding:0 4px 0 18px}
+input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-family:Anton,sans-serif;font-size:32px;letter-spacing:.12em;color:var(--ink);padding:16px 12px 16px 0;text-transform:uppercase}
+.field.bad{border-color:var(--red);animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+button{margin-top:14px;width:100%;border:0;border-radius:18px;background:var(--leaf);color:var(--ink);font-family:Anton,sans-serif;font-size:26px;letter-spacing:.04em;padding:16px;cursor:pointer}
+button:active{transform:scale(.98)}
+.msg{min-height:22px;margin-top:12px;font-weight:700;color:#ffb3aa}
+.hint{margin-top:22px;font-size:13px;color:#8fb3a3}
+/* result */
+.result{position:fixed;inset:0;background:var(--leaf);color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .25s}
+.result.show{opacity:1;pointer-events:auto}
+.result.used{background:#F3C969}
+.check{width:150px;height:150px;border-radius:50%;background:var(--forest);display:grid;place-items:center;transform:scale(.3);transition:transform .45s cubic-bezier(.2,1.6,.4,1)}
+.result.show .check{transform:scale(1)}
+.check svg{width:84px;height:84px}
+.result h2{font-family:Anton,sans-serif;font-weight:400;font-size:clamp(46px,13vw,90px);margin:26px 0 4px;line-height:1}
+.result .rw{font-size:22px;font-weight:800;margin:4px 0}
+.result .cd{font-family:Anton,sans-serif;font-size:28px;letter-spacing:.12em;margin-top:10px;background:rgba(10,24,18,.12);padding:6px 14px;border-radius:12px}
+.result .tm{margin-top:8px;font-size:14px;font-weight:700;opacity:.7}
+.result button{max-width:320px;background:var(--forest);color:var(--white)}
+.confetti{position:fixed;top:-10px;width:10px;height:16px;border-radius:2px;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+footer{padding:14px;text-align:center;font-size:12px;color:#8fb3a3}
+</style>
+</head>
+<body>
+<header><div class="logo"><i></i>REVA</div><div class="tag">PARTNER</div></header>
+<main>
+  <h1>REDEEM A CODE</h1>
+  <p class="sub">Type the customer's REVA code</p>
+  <div class="box">
+    <div class="field" id="field"><span>REVA-</span><input id="code" maxlength="4" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="AB12" inputmode="text"></div>
+    <button id="go">VALIDATE</button>
+    <div class="msg" id="msg"></div>
+    <div class="hint">Codes look like <b>REVA-AB12</b> · one use each</div>
+  </div>
+</main>
+<footer>REVA · Recycle. Earn. Transform. · Partner screen</footer>
+
+<div class="result" id="res">
+  <div class="check" id="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#5FD07A" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+  <h2 id="rt">APPROVED</h2>
+  <div class="rw" id="rw">Free coffee ☕</div>
+  <div class="cd" id="rc">REVA-AB12</div>
+  <div class="tm" id="rtm"></div>
+  <button id="next">NEXT CUSTOMER</button>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const inp=$('code'),field=$('field'),msg=$('msg'),res=$('res');
+let used={};try{used=JSON.parse(localStorage.getItem('reva_used')||'{}')}catch(e){}
+function save(){try{localStorage.setItem('reva_used',JSON.stringify(used))}catch(e){}}
+function beep(ok){try{const a=new (window.AudioContext||window.webkitAudioContext)();const notes=ok?[660,880,1320]:[300,220];notes.forEach((f,i)=>{const o=a.createOscillator(),g=a.createGain();o.frequency.value=f;o.type='sine';g.gain.setValueAtTime(.25,a.currentTime+i*.12);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+i*.12+.25);o.connect(g).connect(a.destination);o.start(a.currentTime+i*.12);o.stop(a.currentTime+i*.12+.3)})}catch(e){}}
+function confetti(){const cols=['#0D3B2E','#F6F8F4','#8CC2EA','#F3C969'];for(let i=0;i<60;i++){const d=document.createElement('div');d.className='confetti';d.style.left=Math.random()*100+'vw';d.style.background=cols[i%4];d.style.animationDuration=(1.6+Math.random()*1.6)+'s';d.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(d);setTimeout(()=>d.remove(),3800)}}
+inp.addEventListener('input',()=>{inp.value=inp.value.toUpperCase().replace(/[^A-Z0-9]/g,'').replace(/^REVA/,'').slice(0,4);field.classList.remove('bad');msg.textContent=''});
+function validate(){
+  const c=inp.value.trim();
+  if(c.length!==4){field.classList.remove('bad');void field.offsetWidth;field.classList.add('bad');msg.textContent='Codes have 4 letters or numbers';beep(false);return}
+  const full='REVA-'+c,now=new Date();
+  if(used[full]){
+    res.classList.add('used');$('rt').textContent='ALREADY USED';$('rw').textContent='This code was redeemed before';
+    $('rtm').textContent='Used '+used[full];$('chk').innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="#F3C969" stroke-width="3.2" stroke-linecap="round"><path d="M12 7v6M12 17h.01"/></svg>';beep(false);
+  }else{
+    used[full]=now.toLocaleString([], {dateStyle:'short',timeStyle:'short'});save();
+    res.classList.remove('used');$('rt').textContent='APPROVED';$('rw').textContent='Reward unlocked ☕';
+    $('rtm').textContent=now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})+' · Thanks for recycling';
+    $('chk').innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="#5FD07A" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';beep(true);confetti();
+  }
+  $('rc').textContent=full;res.classList.add('show');inp.blur();
+}
+$('go').onclick=validate;
+inp.addEventListener('keydown',e=>{if(e.key==='Enter')validate()});
+$('next').onclick=()=>{res.classList.remove('show');inp.value='';setTimeout(()=>inp.focus(),250)};
+</script>
+</body>
+</html>
