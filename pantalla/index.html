@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>REVA Machine Screen</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Manrope:wght@500;700;800&family=JetBrains+Mono:wght@700&display=swap">
+<style>
+body{margin:0}img,video{max-width:100%}[hidden]{display:none!important}
+
+/* Layout: a single full-screen kiosk surface; one state visible at a time, sized in vmin so it fills any iPad orientation */
+:root{
+  --bg:#08221a; --panel:#0e3326; --line:#1e4c3b; --ink:#e8f4ec; --muted:#9cbcab;
+  --leaf:#5fd07a; --leaf-ink:#06200f; --glass:#8cc2ea; --glass-ink:#062033; --sun:#ffd23f;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Manrope",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);overflow:hidden;-webkit-user-select:none;user-select:none;touch-action:manipulation}
+.screen{position:fixed;inset:0;padding:max(3vmin,env(safe-area-inset-top,0px)) max(4vmin,env(safe-area-inset-right,0px)) max(3vmin,env(safe-area-inset-bottom,0px)) max(4vmin,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:3vmin;transition:opacity .35s}
+.screen[hidden]{display:none!important}
+.top{display:flex;justify-content:space-between;align-items:center;gap:2vmin}
+.logo{display:flex;align-items:center;gap:1.4vmin;font-family:var(--display);font-weight:800;font-size:6vmin;letter-spacing:.14em}
+.logo svg{width:5vmin;height:5vmin}
+.chip{font-family:var(--mono);font-size:2.4vmin;color:var(--muted);border:1px solid var(--line);padding:.8vmin 1.8vmin;border-radius:99px}
+h1,h2{font-family:var(--display);font-weight:800;text-transform:uppercase;margin:0;line-height:.92}
+button{font:inherit;cursor:pointer;border:none}
+:focus-visible{outline:4px solid var(--leaf);outline-offset:4px}
+
+/* idle */
+#idle{cursor:pointer}
+.idle-main{flex:1;display:grid;grid-template-columns:1.1fr .9fr;gap:4vmin;align-items:center;min-height:0}
+.idle-main h1{font-size:13vmin}
+.idle-main h1 em{font-style:normal;color:var(--leaf)}
+.tap{margin-top:3vmin;display:inline-flex;align-items:center;gap:1.6vmin;background:var(--leaf);color:var(--leaf-ink);font-weight:800;font-size:3.4vmin;padding:2vmin 3.6vmin;border-radius:99px;animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+.ad{background:var(--panel);border:1px solid var(--line);border-radius:3vmin;padding:3.6vmin;display:grid;gap:1.6vmin;min-height:46vmin;align-content:center;position:relative;overflow:hidden}
+.ad .tag{font-size:2vmin;font-weight:800;letter-spacing:.14em;color:var(--sun);text-transform:uppercase}
+.ad h2{font-size:8vmin}
+.ad p{margin:0;font-size:2.8vmin;color:var(--muted)}
+.ad .big{font-family:var(--display);font-weight:800;font-size:11vmin;color:var(--leaf);line-height:1}
+.dots{display:flex;gap:1vmin;position:absolute;bottom:2.4vmin;left:3.6vmin}
+.dots i{width:1.4vmin;height:1.4vmin;border-radius:50%;background:var(--line)}
+.dots i.on{background:var(--leaf)}
+.foot{display:flex;justify-content:space-between;color:var(--muted);font-size:2.2vmin}
+
+/* scan */
+.center{flex:1;display:grid;place-items:center;text-align:center;align-content:center;gap:3vmin}
+.qrbox{width:26vmin;height:26vmin;border-radius:3vmin;border:.8vmin solid var(--leaf);position:relative;display:grid;place-items:center;overflow:hidden}
+.qrbox svg{width:18vmin;height:18vmin}
+.beam{position:absolute;left:0;right:0;height:1vmin;background:var(--leaf);box-shadow:0 0 3vmin var(--leaf);animation:beam 1.1s ease-in-out infinite alternate}
+@keyframes beam{from{top:6%}to{top:90%}}
+.center h2{font-size:7vmin}
+.center p{margin:0;font-size:3vmin;color:var(--muted)}
+
+/* session */
+.session{flex:1;display:grid;grid-template-columns:.85fr 1.15fr;gap:3vmin;min-height:0}
+.side{background:var(--panel);border:1px solid var(--line);border-radius:3vmin;padding:3vmin;display:flex;flex-direction:column;gap:1.6vmin;min-height:0}
+.side .label{font-size:2vmin;font-weight:800;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.balance{font-family:var(--mono);font-size:11vmin;line-height:1;color:var(--ink)}
+.balance.bump{animation:bump .5s}
+@keyframes bump{40%{transform:scale(1.12);color:var(--leaf)}}
+.gain{font-family:var(--display);font-weight:800;font-size:4vmin;color:var(--leaf)}
+.list{list-style:none;margin:0;padding:0;overflow:auto;flex:1;display:flex;flex-direction:column;gap:1vmin}
+.list li{display:flex;justify-content:space-between;font-size:2.6vmin;padding:1vmin 0;border-bottom:1px solid var(--line)}
+.list li b{font-family:var(--mono);color:var(--leaf)}
+.list li.g b{color:var(--glass)}
+.empty{color:var(--muted);font-size:2.6vmin}
+.pick{display:grid;grid-template-rows:1fr 1fr auto;gap:2.4vmin;min-height:0}
+.big-btn{border-radius:3vmin;display:flex;align-items:center;justify-content:space-between;padding:0 4vmin;font-family:var(--display);font-weight:800;text-transform:uppercase;transition:transform .12s}
+.big-btn:active{transform:scale(.97)}
+.big-btn span{font-size:8vmin;line-height:1}
+.big-btn small{font-family:var(--mono);font-size:4vmin}
+.big-btn.pet{background:var(--leaf);color:var(--leaf-ink)}
+.big-btn.glass{background:var(--glass);color:var(--glass-ink)}
+.big-btn svg{width:7vmin;height:11vmin}
+.finish{background:transparent;color:var(--ink);border:.3vmin solid var(--line);border-radius:99px;padding:2vmin;font-weight:800;font-size:3vmin}
+
+/* overlay */
+.overlay{position:fixed;inset:0;background:color-mix(in srgb,var(--bg) 88%,transparent);display:grid;place-items:center;text-align:center;z-index:5}
+.overlay[hidden]{display:none}
+.ring{width:30vmin;height:30vmin;border-radius:50%;border:1.4vmin solid var(--line);border-top-color:var(--leaf);animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ok{width:30vmin;height:30vmin;border-radius:50%;background:var(--leaf);display:grid;place-items:center;animation:pop .35s cubic-bezier(.2,1.6,.4,1)}
+.ok.g{background:var(--glass)}
+.ok svg{width:16vmin;height:16vmin}
+@keyframes pop{from{transform:scale(.3)}to{transform:scale(1)}}
+.ov-text h2{font-size:12vmin;margin-top:3vmin}
+.ov-text p{margin:1vmin 0 0;font-size:3.2vmin;color:var(--muted)}
+
+/* summary */
+.sum-grid{display:flex;gap:4vmin;justify-content:center;flex-wrap:wrap}
+.sum-grid div{background:var(--panel);border:1px solid var(--line);border-radius:3vmin;padding:2.6vmin 4vmin;min-width:24vmin}
+.sum-grid b{display:block;font-family:var(--mono);font-size:7vmin;color:var(--leaf)}
+.sum-grid span{font-size:2.4vmin;color:var(--muted)}
+.bar{height:1vmin;background:var(--line);border-radius:99px;overflow:hidden;width:50vmin}
+.bar i{display:block;height:100%;background:var(--leaf);width:0}
+.fs{position:fixed;left:50%;transform:translateX(-50%);top:max(1vmin,env(safe-area-inset-top,0px));background:transparent;color:var(--muted);font-size:1.8vmin;opacity:.5;z-index:6;padding:1vmin}
+@media (orientation:portrait){.idle-main,.session{grid-template-columns:1fr}.ad{min-height:30vmin}.pick{grid-template-rows:22vmin 22vmin auto}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+
+<!-- IDLE -->
+<section class="screen" id="idle" aria-label="Tap to start">
+  <div class="top">
+    <div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4C10 4 4 9 4 17c0 1 .2 2 .5 3C6 13 11 10 16 9c-4 2-7 5-9 10 9 0 13-6 13-15Z" fill="#5fd07a"/></svg>REVA</div>
+    <span class="chip">Machine 01 · UAZ Siglo XXI</span>
+  </div>
+  <div class="idle-main">
+    <div>
+      <h1>Plastic or glass?<br><em>Both count.</em></h1>
+      <div class="tap">Tap to start</div>
+    </div>
+    <div class="ad" id="ad"></div>
+  </div>
+  <div class="foot"><span>+10 plastic · +15 glass</span><span>Recycle. Earn. Transform.</span></div>
+</section>
+
+<!-- SCAN -->
+<section class="screen" id="scan" hidden>
+  <div class="top"><div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4C10 4 4 9 4 17c0 1 .2 2 .5 3C6 13 11 10 16 9c-4 2-7 5-9 10 9 0 13-6 13-15Z" fill="#5fd07a"/></svg>REVA</div></div>
+  <div class="center">
+    <div class="qrbox"><svg viewBox="0 0 7 7" aria-hidden="true"><path fill="#e8f4ec" d="M0 0h3v3H0zM4 0h3v3H4zM0 4h3v3H0zM1 1v1h1V1zM5 1v1h1V1zM1 5v1h1V5zM4 4h1v1H4zM6 4h1v1H6zM5 5h1v2H5zM4 6h1v1H4z" fill-rule="evenodd"/></svg><div class="beam"></div></div>
+    <h2>Scanning your QR…</h2>
+    <p>Hold your code from the REVA website up to the reader</p>
+  </div>
+</section>
+
+<!-- SESSION -->
+<section class="screen" id="session" hidden>
+  <div class="top">
+    <div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4C10 4 4 9 4 17c0 1 .2 2 .5 3C6 13 11 10 16 9c-4 2-7 5-9 10 9 0 13-6 13-15Z" fill="#5fd07a"/></svg>REVA</div>
+    <span class="chip">Hi, Sample User 👋</span>
+  </div>
+  <div class="session">
+    <div class="side">
+      <span class="label">Your points</span>
+      <div class="balance" id="bal">120</div>
+      <div class="gain" id="gain">+0 this visit</div>
+      <span class="label" style="margin-top:1vmin">This visit</span>
+      <ul class="list" id="list"><li class="empty">Drop your first bottle →</li></ul>
+    </div>
+    <div class="pick">
+      <button class="big-btn pet" id="b-pet" type="button"><span>Plastic</span><small>+10</small></button>
+      <button class="big-btn glass" id="b-glass" type="button"><span>Glass</span><small>+15</small></button>
+      <button class="finish" id="finish" type="button">I'm done</button>
+    </div>
+  </div>
+</section>
+
+<!-- SUMMARY -->
+<section class="screen" id="summary" hidden>
+  <div class="top"><div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4C10 4 4 9 4 17c0 1 .2 2 .5 3C6 13 11 10 16 9c-4 2-7 5-9 10 9 0 13-6 13-15Z" fill="#5fd07a"/></svg>REVA</div></div>
+  <div class="center">
+    <h2 style="font-size:10vmin">Thank you!</h2>
+    <div class="sum-grid">
+      <div><b id="s-bottles">0</b><span>bottles</span></div>
+      <div><b id="s-gain">+0</b><span>points earned</span></div>
+      <div><b id="s-total">120</b><span>total points</span></div>
+    </div>
+    <p id="s-next"></p>
+    <div class="bar"><i id="s-bar"></i></div>
+  </div>
+</section>
+
+<!-- OVERLAY -->
+<div class="overlay" id="ov" hidden>
+  <div class="ov-text" id="ov-in"></div>
+</div>
+<button class="fs" id="fs" type="button">Full screen</button>
+
+<script>
+const $=id=>document.getElementById(id);
+const ADS=[
+  {tag:'Partner reward',h:'Free coffee',big:'100 pts',p:'At our partner café downtown'},
+  {tag:'Partner reward',h:'10% off',big:'150 pts',p:'At our partner sports store'},
+  {tag:'Advertise here',h:'Your brand on this screen',big:'300 / day',p:'People see this screen while they recycle'},
+  {tag:'Partner reward',h:'2-for-1 movie',big:'300 pts',p:'At our partner cinema'}
+];
+const REWARDS=[{n:'a free coffee',c:100},{n:'10% off',c:150},{n:'an ice cream',c:200},{n:'a 2-for-1 movie',c:300}];
+let state={bal:120,start:120,items:[]},busy=false,adI=0,adT,idleT,sumT;
+
+function show(id){['idle','scan','session','summary'].forEach(s=>$(s).hidden=s!==id);}
+function renderAd(){
+  const a=ADS[adI%ADS.length];
+  $('ad').innerHTML=`<span class="tag">${a.tag}</span><h2>${a.h}</h2><div class="big">${a.big}</div><p>${a.p}</p><div class="dots">${ADS.map((_,i)=>`<i class="${i===adI%ADS.length?'on':''}"></i>`).join('')}</div>`;
+}
+function startAds(){renderAd();clearInterval(adT);adT=setInterval(()=>{adI++;renderAd();},4000);}
+
+let ac;
+function tone(freqs,dur=.12,type='sine',vol=.18){
+  try{
+    ac=ac||new (window.AudioContext||window.webkitAudioContext)();
+    freqs.forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.type=type;o.frequency.value=f;
+      const t=ac.currentTime+i*dur;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+.01);g.gain.exponentialRampToValueAtTime(.001,t+dur*1.6);
+      o.connect(g).connect(ac.destination);o.start(t);o.stop(t+dur*1.8);});
+  }catch(e){}
+}
+function resetIdle(){clearTimeout(idleT);idleT=setTimeout(()=>{if(!$('session').hidden)finish();},45000);}
+
+function begin(){
+  if(!$('idle').hidden){
+    tone([660]);show('scan');
+    state={bal:120,start:120,items:[]};
+    setTimeout(()=>{tone([660,880],.1);renderSession();show('session');resetIdle();},1600);
+  }
+}
+function renderSession(){
+  $('bal').textContent=state.bal;
+  const g=state.bal-state.start;$('gain').textContent=`+${g} this visit`;
+  $('list').innerHTML=state.items.length?state.items.slice().reverse().map(it=>`<li class="${it.t==='glass'?'g':''}"><span>${it.t==='glass'?'Glass bottle':'Plastic bottle'}</span><b>+${it.p}</b></li>`).join(''):'<li class="empty">Drop your first bottle →</li>';
+}
+function deposit(t){
+  if(busy)return;busy=true;resetIdle();
+  const pts=t==='glass'?15:10;
+  $('ov-in').innerHTML=`<div class="ring" style="margin:auto"></div><h2 style="font-size:7vmin">Checking bottle…</h2><p>Shape · barcode · weight</p>`;
+  $('ov').hidden=false;tone([440],.08,'triangle',.1);
+  setTimeout(()=>{
+    $('ov-in').innerHTML=`<div class="ok ${t==='glass'?'g':''}" style="margin:auto"><svg viewBox="0 0 24 24" fill="none" stroke="#06200f" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h2>+${pts}</h2><p>${t==='glass'?'Glass':'Plastic'} bottle accepted</p>`;
+    tone([784,1047,1319],.09,'sine',.2);
+    state.items.push({t,p:pts});
+    setTimeout(()=>{
+      $('ov').hidden=true;busy=false;
+      state.bal+=pts;renderSession();
+      const b=$('bal');b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump');
+    },1100);
+  },1100);
+}
+function finish(){
+  if(busy)return;clearTimeout(idleT);
+  const gain=state.bal-state.start;
+  $('s-bottles').textContent=state.items.length;$('s-gain').textContent='+'+gain;$('s-total').textContent=state.bal;
+  const nx=REWARDS.find(r=>r.c>state.bal);const have=[...REWARDS].reverse().find(r=>r.c<=state.bal);
+  $('s-next').textContent=have?`You can already get ${have.n}. Redeem it on the REVA website.`:`${nx.c-state.bal} points to ${nx.n}.`;
+  show('summary');tone([523,659,784,1047],.11);
+  const bar=$('s-bar');bar.style.transition='none';bar.style.width='0';void bar.offsetWidth;bar.style.transition='width 9s linear';bar.style.width='100%';
+  clearTimeout(sumT);sumT=setTimeout(()=>{show('idle');startAds();},9000);
+}
+$('idle').addEventListener('click',begin);
+$('b-pet').addEventListener('click',()=>deposit('pet'));
+$('b-glass').addEventListener('click',()=>deposit('glass'));
+$('finish').addEventListener('click',finish);
+$('summary').addEventListener('click',()=>{clearTimeout(sumT);show('idle');startAds();});
+document.addEventListener('keydown',e=>{
+  if(e.key==='p')deposit('pet');if(e.key==='g')deposit('glass');
+  if(e.key===' '||e.key==='Enter'){if(!$('idle').hidden)begin();}
+});
+$('fs').addEventListener('click',async e=>{
+  e.stopPropagation();
+  try{const el=document.documentElement;(el.requestFullscreen?await el.requestFullscreen():el.webkitRequestFullscreen&&el.webkitRequestFullscreen());$('fs').hidden=true;}catch(err){$('fs').textContent='Full screen not available here';}
+});
+(async()=>{try{if('wakeLock' in navigator)await navigator.wakeLock.request('screen');}catch(e){}})();
+document.addEventListener('gesturestart',e=>e.preventDefault());
+startAds();
+</script>
+
+</body>
+</html>
