@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>REVA Recycle</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Manrope:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+body{margin:0}img,video{max-width:100%}[hidden]{display:none!important}
+
+/* Layout: forest-green bands alternate with pale "paper" bands; the hero holds a working machine that feeds one shared points balance used across the page */
+:root{
+  --bg:#f2f5f0; --surface:#ffffff; --ink:#0f241c; --muted:#56685f; --line:#d5dfd7;
+  --forest:#0d3b2e; --forest-2:#134a3a; --on-forest:#e6f2ea; --leaf:#5fd07a; --leaf-ink:#082417;
+  --glass:#8cc2ea; --cantera:#e8bea8; --sun:#ffd23f; --bad:#c9443a; --warn:#d99a1c;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --r:18px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#07120e; --surface:#0e1c17; --ink:#e2ede6; --muted:#9bb0a5; --line:#1d3a2f;
+  --forest:#0a2a20; --forest-2:#0f3729; --on-forest:#e2f0e7; --leaf:#6ddc88; --leaf-ink:#062016;
+  --glass:#9ccdf0; --cantera:#d9a891; --sun:#ffd84f; --bad:#e46a5f; --warn:#e8ad3d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#07120e; --surface:#0e1c17; --ink:#e2ede6; --muted:#9bb0a5; --line:#1d3a2f;
+  --forest:#0a2a20; --forest-2:#0f3729; --on-forest:#e2f0e7; --leaf:#6ddc88; --leaf-ink:#062016;
+  --glass:#9ccdf0; --cantera:#d9a891; --sun:#ffd84f; --bad:#e46a5f; --warn:#e8ad3d; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.95;text-transform:uppercase;text-wrap:balance;margin:0;letter-spacing:.005em}
+h2{font-size:clamp(2.3rem,5.5vw,3.6rem)}
+h3{font-size:1.55rem;font-weight:600}
+p{margin:0;max-width:62ch}
+.eyebrow{font-size:.76rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+button,input,select{font:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
+section{padding-block:72px}
+.head{display:grid;gap:10px;margin-bottom:30px}
+.band{background:var(--forest);color:var(--on-forest)}
+.band .eyebrow{color:color-mix(in srgb,var(--on-forest) 70%,transparent)}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700;padding:4px 10px;border-radius:99px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:none;border-radius:999px;padding:13px 22px;font-weight:800;text-decoration:none;transition:transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:var(--leaf);color:var(--leaf-ink)}
+.btn.ghost{background:transparent;color:inherit;border:1.5px solid color-mix(in srgb,currentColor 40%,transparent)}
+
+/* header */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--forest)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--forest);color:var(--on-forest);border-bottom:1px solid color-mix(in srgb,var(--on-forest) 12%,transparent)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-block:12px}
+.logo{font-family:var(--display);font-weight:800;font-size:1.7rem;letter-spacing:.1em;display:flex;align-items:center;gap:8px;color:inherit;text-decoration:none}
+.logo svg{width:22px;height:22px}
+nav{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{color:var(--on-forest);text-decoration:none;font-size:.88rem;font-weight:600;opacity:.8;white-space:nowrap}
+nav a:hover{opacity:1}
+.balance-chip{display:flex;align-items:center;gap:8px;background:color-mix(in srgb,var(--leaf) 18%,transparent);border:1px solid color-mix(in srgb,var(--leaf) 45%,transparent);padding:5px 12px;border-radius:99px;font-weight:700;font-size:.88rem;white-space:nowrap}
+@media (max-width:760px){nav{display:none}}
+
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;padding-block:56px 64px}
+.hero h1{font-size:clamp(3.1rem,8.5vw,6.2rem)}
+.hero h1 em{font-style:normal;color:var(--leaf)}
+.hero .lead{margin-top:18px;font-size:1.12rem;opacity:.9}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.machine{background:var(--forest-2);border:1px solid color-mix(in srgb,var(--on-forest) 16%,transparent);border-radius:26px;padding:22px;display:grid;gap:16px;min-width:0;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.m-top{display:flex;justify-content:space-between;align-items:center}
+.m-top b{font-family:var(--display);font-size:1.6rem;letter-spacing:.14em}
+.screen{background:color-mix(in srgb,var(--leaf) 12%,var(--forest));border-radius:14px;padding:16px;text-align:center;min-height:112px;display:grid;place-content:center;gap:4px}
+.screen .big{font-family:var(--display);font-weight:800;font-size:2.6rem;color:var(--leaf);line-height:1}
+.screen.glass .big{color:var(--glass)}
+.screen .small{font-size:.9rem;opacity:.85}
+.slots{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.slot{background:transparent;color:var(--on-forest);border:none;display:grid;justify-items:center;gap:6px;padding:6px;border-radius:14px}
+.ring{width:88px;height:88px;border-radius:50%;border:6px solid var(--leaf);display:grid;place-items:center;background:#06100c;transition:box-shadow .25s,transform .15s}
+.slot.glass .ring{border-color:var(--glass)}
+.slot:hover .ring,.slot:focus-visible .ring{transform:scale(1.05);box-shadow:0 0 26px color-mix(in srgb,var(--leaf) 60%,transparent)}
+.slot.glass:hover .ring{box-shadow:0 0 26px color-mix(in srgb,var(--glass) 60%,transparent)}
+.slot svg{width:26px;height:40px;color:#e6f2ea}
+.slot b{font-family:var(--display);font-size:1.25rem;letter-spacing:.08em}
+.slot small{opacity:.75}
+.machine-note{font-size:.8rem;opacity:.65;text-align:center}
+
+/* stats */
+.stats{background:var(--forest-2);color:var(--on-forest)}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:22px 18px;border-left:1px solid color-mix(in srgb,var(--on-forest) 14%,transparent);display:grid;gap:2px}
+.stat:first-child{border-left:none}
+.stat b{font-family:var(--display);font-weight:800;font-size:2.4rem;line-height:1;color:var(--leaf)}
+.stat span{font-size:.85rem;opacity:.8}
+@media (max-width:760px){.stats .wrap{grid-template-columns:1fr 1fr}.stat:nth-child(3){border-left:none}.stat{border-top:1px solid color-mix(in srgb,var(--on-forest) 14%,transparent)}}
+
+/* videos */
+.main-video{border-radius:var(--r);overflow:hidden;background:#000;aspect-ratio:16/9;max-width:100%}
+.main-video video{width:100%;height:100%;display:block}
+.reels{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(200px,1fr);gap:16px;overflow-x:auto;padding:22px 2px 8px;scroll-snap-type:x mandatory}
+.reel{scroll-snap-align:start;display:grid;gap:6px;min-width:0;align-content:start}
+.reel video{width:100%;aspect-ratio:9/16;border-radius:16px;background:#000;display:block;object-fit:cover}
+.reel b{font-size:.95rem;margin-top:4px}
+.reel span{font-size:.82rem;color:var(--muted)}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;list-style:none;padding:0;margin:0}
+.steps li{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;gap:10px;align-content:start;min-width:0}
+.steps .n{width:46px;height:46px;border-radius:50%;background:var(--leaf);color:var(--leaf-ink);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.6rem}
+@media (max-width:820px){.steps{grid-template-columns:1fr}}
+
+/* rewards */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media (max-width:860px){.two,.hero .wrap{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;min-width:0}
+.bal{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.bal .pts{font-family:var(--display);font-weight:800;font-size:4.4rem;line-height:1}
+.progress{height:12px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:12px}
+.progress i{display:block;height:100%;background:var(--leaf);transition:width .4s}
+.next{font-size:.9rem;color:var(--muted);margin-top:8px}
+.rewards{display:grid;gap:10px;margin-top:18px}
+.reward{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:14px}
+.reward .ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--leaf) 18%,transparent);font-family:var(--display);font-weight:800;font-size:1.1rem}
+.reward small{display:block;color:var(--muted);font-size:.82rem}
+.reward button{background:var(--leaf);color:var(--leaf-ink);border:none;border-radius:999px;padding:8px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+.reward button:disabled{background:var(--line);color:var(--muted);cursor:not-allowed}
+.code{margin-top:14px;padding:14px;border-radius:12px;background:color-mix(in srgb,var(--leaf) 18%,var(--surface));font-size:.95rem}
+.history{list-style:none;margin:14px 0 0;padding:0;max-height:180px;overflow:auto}
+.history li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+.plus{color:color-mix(in srgb,var(--leaf) 70%,var(--ink));font-weight:800}
+.minus{color:var(--bad);font-weight:800}
+
+/* calculator */
+.calc{display:grid;gap:16px;align-content:start}
+.counter{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:14px}
+.counter label{font-weight:700}
+.counter small{display:block;color:var(--muted);font-weight:500}
+.stepper{display:flex;align-items:center;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.stepper button{width:42px;height:42px;border:none;background:transparent;color:var(--ink);font-size:1.3rem;font-weight:700}
+.stepper input{width:58px;text-align:center;border:none;background:transparent;color:var(--ink);font-family:var(--mono);font-size:1.05rem;-moz-appearance:textfield}
+.stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.result{background:var(--forest);color:var(--on-forest);border-radius:16px;padding:18px;display:grid;gap:10px}
+.result .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.result b{font-family:var(--display);font-size:2.2rem;color:var(--leaf);line-height:1}
+.result small{opacity:.8}
+
+/* quiz */
+.quiz-wrap{background:var(--sun);color:#151515}
+.quiz-wrap .eyebrow{color:#3a3410}
+.quiz{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.q{background:#fff;border-radius:var(--r);padding:22px;display:grid;gap:14px;align-content:start;box-shadow:8px 10px 0 #151515;min-width:0}
+.q .claim{font-family:var(--display);font-weight:800;font-size:1.75rem;line-height:1.02}
+.q .opts{display:flex;gap:10px}
+.q .opts button{flex:1;border:2px solid #151515;background:#fff;color:#151515;border-radius:12px;padding:10px;font-weight:800;letter-spacing:.06em}
+.q .opts button:hover{background:#151515;color:#fff}
+.q .answer{border-radius:12px;padding:12px;color:#fff;font-size:.95rem}
+.q .answer.myth{background:#c9302a}.q .answer.fact{background:#1a8a46}
+.q .answer b{display:block;font-family:var(--display);font-size:1.4rem;letter-spacing:.04em}
+.q .src{font-size:.78rem;color:#555}
+.q .src a{color:#555}
+.score{margin-top:22px;font-weight:800}
+@media (max-width:900px){.quiz{grid-template-columns:1fr}}
+
+/* machines */
+.cantera{background:var(--cantera);color:#3a2218}
+.cantera .eyebrow{color:#6a4434}
+.map-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:start}
+@media (max-width:860px){.map-grid{grid-template-columns:1fr}}
+.mapbox{background:#fcf3e8;border-radius:var(--r);box-shadow:8px 10px 0 #3a2218;overflow:hidden}
+.mapbox svg{display:block;width:100%;height:auto}
+.pin{cursor:pointer}
+.list{display:grid;gap:10px}
+.spot{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:#fcf3e8;border:2px solid transparent;border-radius:14px;padding:12px 14px;text-align:left;color:#3a2218;width:100%}
+.spot.on{border-color:#127068}
+.spot .num{width:32px;height:32px;border-radius:50%;background:#127068;color:#fcf3e8;display:grid;place-items:center;font-weight:800}
+.spot small{display:block;color:#7a5444;font-size:.8rem}
+.bar{height:8px;border-radius:99px;background:#ead2c2;overflow:hidden;width:80px;margin-top:4px}
+.bar i{display:block;height:100%;background:#127068}
+.bar i.hi{background:#d98a1c}
+.fill{font-family:var(--mono);font-size:.82rem;text-align:right}
+.note{font-size:.82rem;margin-top:12px;color:#6a4434}
+.quick{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.quick button{border:none;border-radius:999px;padding:9px 14px;font-weight:800;font-size:.85rem}
+.quick .qp{background:var(--leaf);color:var(--leaf-ink)}
+.quick .qg{background:var(--glass);color:#062033}
+.quick .qr{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.ticket{display:grid;grid-template-columns:1fr auto;gap:6px 14px;align-items:center}
+.ticket .tcode{font-family:var(--mono);font-size:1.6rem;font-weight:700;letter-spacing:.08em;grid-row:1/span 3;grid-column:2;background:var(--surface);border:2px dashed var(--leaf);border-radius:10px;padding:8px 12px}
+.ticket small{color:var(--muted)}
+.spot a{font-size:.78rem;font-weight:700;color:#127068;text-decoration:none;white-space:nowrap}
+.spot a:hover{text-decoration:underline}
+.mapbox .lbl{font-family:Manrope,sans-serif;font-size:13px;font-weight:700;fill:#3a2218}
+
+/* brands */
+.offers{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:760px){.offers{grid-template-columns:1fr}}
+.offer{border:1px solid color-mix(in srgb,var(--on-forest) 22%,transparent);border-radius:var(--r);padding:24px;display:grid;gap:10px;align-content:start;min-width:0}
+.price{font-family:var(--display);font-weight:800;font-size:2.8rem;color:var(--leaf);line-height:1}
+.price small{font-size:1rem;font-weight:600;color:var(--on-forest);opacity:.8}
+.offer ul{margin:0;padding-left:18px;display:grid;gap:4px}
+form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+form label{display:grid;gap:6px;font-size:.85rem;font-weight:600}
+form input,form select{padding:12px;border-radius:12px;border:1px solid color-mix(in srgb,var(--on-forest) 30%,transparent);background:color-mix(in srgb,var(--on-forest) 6%,var(--forest));color:var(--on-forest);width:100%}
+form .full{grid-column:1/-1}
+form .btn{justify-self:start}
+.sent{grid-column:1/-1;font-size:.92rem}
+@media (max-width:640px){form{grid-template-columns:1fr}}
+
+/* faq */
+.faq{display:grid;gap:10px;max-width:780px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+summary{cursor:pointer;font-weight:800;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--mono);color:var(--muted)}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;color:var(--muted)}
+
+footer{padding-block:30px;font-size:.85rem;background:var(--forest);color:color-mix(in srgb,var(--on-forest) 75%,transparent)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:999px;font-weight:700;font-size:.92rem;z-index:20}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4C10 4 4 9 4 17c0 1 .2 2 .5 3C6 13 11 10 16 9c-4 2-7 5-9 10 9 0 13-6 13-15Z" fill="#5fd07a"/></svg>REVA</a>
+    <nav aria-label="Sections">
+      <a href="#videos">Videos</a><a href="#how">How it works</a><a href="#rewards">Rewards</a><a href="#quiz">Myth or fact</a><a href="#machines">Machines</a><a href="#brands">Brands</a><a href="#faq">FAQ</a>
+    </nav>
+    <span class="balance-chip" title="Sample balance"><span class="mono" id="chip-pts">120</span> pts</span>
+  </div>
+</header>
+
+<div class="band hero" id="top">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Recycling that pays you back · Zacatecas</p>
+      <h1 style="margin-top:14px">Your bottles are <em>worth more</em> than trash.</h1>
+      <p class="lead">Drop plastic or glass bottles into a REVA machine and earn points on the spot. Trade them for coffee, ice cream, discounts and movie tickets at local partners. No app to download.</p>
+      <div class="cta">
+        <a class="btn primary" href="#machines">Find a machine</a>
+        <a class="btn ghost" href="#videos">Watch the video</a>
+      </div>
+    </div>
+    <div class="machine" aria-label="REVA machine simulator">
+      <div class="m-top"><b>REVA</b><span class="pill" style="background:color-mix(in srgb,var(--leaf) 20%,transparent)">Try it</span></div>
+      <div class="screen" id="screen" aria-live="polite">
+        <span class="big">Hi!</span>
+        <span class="small">Tap a slot to drop in a bottle</span>
+      </div>
+      <div class="slots">
+        <button class="slot" id="btn-pet" type="button">
+          <span class="ring"><svg viewBox="0 0 26 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 2h6v5l3 4v25a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V11l3-4Z"/><path d="M7 18h12M7 26h12"/></svg></span>
+          <b>PLASTIC</b><small>+10 points</small>
+        </button>
+        <button class="slot glass" id="btn-glass" type="button">
+          <span class="ring"><svg viewBox="0 0 26 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M11 2h4v9c3 2 4 4 4 7v18a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V18c0-3 1-5 4-7Z"/></svg></span>
+          <b>GLASS</b><small>+15 points</small>
+        </button>
+      </div>
+      <p class="machine-note">Simulator · every tap adds to the sample account in Rewards</p>
+    </div>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="wrap">
+    <div class="stat"><b class="mono">540K</b><span>bottles a year (goal)</span></div>
+    <div class="stat"><b>5</b><span>machines in Zacatecas</span></div>
+    <div class="stat"><b>+10 / +15</b><span>points per plastic / glass</span></div>
+    <div class="stat"><b>0</b><span>apps to download</span></div>
+  </div>
+</div>
+
+<section id="videos">
+  <div class="wrap">
+    <div class="head"><p class="eyebrow">Videos</p><h2>REVA in motion</h2></div>
+    <div class="main-video"><video controls playsinline preload="none" poster="videos/main.jpg" src="videos/main.mp4"></video></div>
+    <div class="reels" aria-label="Short videos">
+      <div class="reel"><video controls playsinline preload="none" poster="videos/how.jpg" src="videos/how.mp4"></video><b>How it works</b><span>3 steps · 20 s</span></div>
+      <div class="reel"><video controls playsinline preload="none" poster="videos/levels.jpg" src="videos/levels.mp4"></video><b>Levels</b><span>What your bottles get you · 16 s</span></div>
+      <div class="reel"><video controls playsinline preload="none" poster="videos/myth.jpg" src="videos/myth.mp4"></video><b>Myth or fact</b><span>Recycling edition · 28 s</span></div>
+      <div class="reel"><video controls playsinline preload="none" poster="videos/find.jpg" src="videos/find.mp4"></video><b>Find a REVA</b><span>5 spots in Zacatecas · 20 s</span></div>
+      <div class="reel"><video controls playsinline preload="none" poster="videos/pov.jpg" src="videos/pov.mp4"></video><b>POV: Mom</b><span>The bottle stash · 18 s</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="how" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><p class="eyebrow">How it works</p><h2>Three steps at the machine</h2></div>
+    <ol class="steps">
+      <li><span class="n">1</span><h3>Scan your QR</h3><p>Open this website on your phone, sign in, and hold your QR code up to the machine's reader.</p></li>
+      <li><span class="n">2</span><h3>Drop your bottle</h3><p>Plastic in the green slot, glass in the blue one. The machine checks each bottle and crushes it so it can't count twice.</p></li>
+      <li><span class="n">3</span><h3>Redeem your points</h3><p>Points arrive instantly. Pick a reward below and show your code at the partner business.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="rewards" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><p class="eyebrow">Rewards <span class="pill" style="background:color-mix(in srgb,var(--warn) 22%,transparent);color:var(--ink)">Sample account</span></p><h2>Points in, rewards out</h2></div>
+    <div class="two">
+      <div class="panel">
+        <p class="eyebrow">Your balance</p>
+        <div class="bal"><span class="pts mono" id="pts">120</span><span>points</span></div>
+        <div class="progress"><i id="prog"></i></div>
+        <p class="next" id="next"></p>
+        <div class="quick">
+          <button type="button" id="q-pet" class="qp">+ Plastic bottle <span class="mono">+10</span></button>
+          <button type="button" id="q-glass" class="qg">+ Glass bottle <span class="mono">+15</span></button>
+          <button type="button" id="q-reset" class="qr">Reset</button>
+        </div>
+        <div class="rewards" id="reward-list"></div>
+        <div class="code" id="code" hidden></div>
+        <p class="eyebrow" style="margin-top:18px">Recent activity</p>
+        <ul class="history" id="history"></ul>
+      </div>
+      <div class="panel calc">
+        <div><p class="eyebrow">Calculator</p><h3 style="margin-top:6px">How much is your bag worth?</h3></div>
+        <div class="counter"><label for="c-pet">Plastic bottles<small>10 points each</small></label>
+          <div class="stepper"><button type="button" data-t="c-pet" data-d="-1" aria-label="Fewer plastic bottles">−</button><input id="c-pet" type="number" min="0" max="999" value="12" inputmode="numeric"><button type="button" data-t="c-pet" data-d="1" aria-label="More plastic bottles">+</button></div></div>
+        <div class="counter"><label for="c-glass">Glass bottles<small>15 points each</small></label>
+          <div class="stepper"><button type="button" data-t="c-glass" data-d="-1" aria-label="Fewer glass bottles">−</button><input id="c-glass" type="number" min="0" max="999" value="4" inputmode="numeric"><button type="button" data-t="c-glass" data-d="1" aria-label="More glass bottles">+</button></div></div>
+        <div class="result" aria-live="polite">
+          <div class="row"><span>Points</span><b class="mono" id="r-pts">0</b></div>
+          <div class="row"><span>Best reward you can get</span><strong id="r-best">—</strong></div>
+          <small id="r-kg"></small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="quiz" class="quiz-wrap">
+  <div class="wrap">
+    <div class="head"><p class="eyebrow">Recycling edition</p><h2>Myth or fact?</h2><p>Tap your answer. Each one comes with its source.</p></div>
+    <div class="quiz" id="quiz-cards"></div>
+    <p class="score" id="score">Score: 0 / 3</p>
+  </div>
+</section>
+
+<section id="machines" class="cantera">
+  <div class="wrap">
+    <div class="head"><p class="eyebrow">Machines</p><h2>Where to find a REVA</h2><p>Five proposed spots around the city of Zacatecas. Tap a pin or a name.</p></div>
+    <div class="map-grid">
+      <div class="mapbox">
+        <svg viewBox="0 0 600 340" role="img" aria-label="Map of the five proposed REVA locations in Zacatecas, placed by their real coordinates">
+          <rect width="600" height="340" fill="#fcf3e8"/>
+          <g id="grid" stroke="#efd9c9" stroke-width="1"></g>
+          <ellipse cx="522" cy="180" rx="62" ry="60" fill="#f1dccd"/>
+          <text x="522" y="262" text-anchor="middle" font-family="Manrope, sans-serif" font-size="12" fill="#7a5444">Centro histórico</text>
+          <text x="30" y="40" font-family="Manrope, sans-serif" font-size="12" fill="#7a5444">← toward Villanueva</text>
+          <g id="pins"></g>
+          <g transform="translate(560 40)"><path d="M0 -18 L7 6 L0 1 L-7 6Z" fill="#3a2218"/><text y="22" text-anchor="middle" font-family="Manrope, sans-serif" font-size="12" font-weight="700" fill="#3a2218">N</text></g>
+          <g id="scale"></g>
+          <text x="16" y="328" font-family="Manrope, sans-serif" font-size="11" fill="#7a5444">Real coordinates (Google Maps) · roads not shown</text>
+        </svg>
+      </div>
+      <div>
+        <div class="list" id="spots"></div>
+        <p class="note">Locations are proposals for a school project; no agreements exist with these places. Fill levels are examples.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="brands" class="band">
+  <div class="wrap">
+    <div class="head"><p class="eyebrow">For brands and schools</p><h2>Put your brand in front of people who recycle</h2><p>Each machine has a screen that about 300 people see every day while they recycle.</p></div>
+    <div class="offers">
+      <div class="offer"><h3>Advertise on the screen</h3><div class="price mono">$5,000 <small>MXN / screen / month</small></div>
+        <ul><li>Your ad plays between bottles</li><li>Your business listed as a reward partner</li><li>Monthly report of bottles and views</li></ul></div>
+      <div class="offer"><h3>Host a REVA</h3><div class="price mono">$2,500 <small>MXN / machine / month</small></div>
+        <ul><li>Setup, maintenance and emptying included</li><li>Less trash on your campus or plaza</li><li>Report of kilos recycled for your green impact</li></ul></div>
+    </div>
+    <form id="lead" novalidate>
+      <label>Name<input id="f-name" placeholder="Your name"></label>
+      <label>Business or school<input id="f-biz" placeholder="Name of the place"></label>
+      <label class="full">I'm interested in<select id="f-type"><option>Advertising on the screens</option><option>Hosting a machine</option><option>Becoming a reward partner</option></select></label>
+      <button class="btn primary" type="submit">Send me info</button>
+      <p class="sent" id="sent" hidden></p>
+    </form>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="head"><p class="eyebrow">FAQ</p><h2>Questions</h2></div>
+    <div class="faq">
+      <details><summary>Do I need to download an app?</summary><p>No. Everything happens on this website: your QR code, your points and your rewards.</p></details>
+      <details><summary>Do I get cash for my bottles?</summary><p>No. REVA works only with points. Partner businesses fund the rewards because REVA brings them new customers.</p></details>
+      <details><summary>Do I have to wash my bottles?</summary><p>Empty them. A quick rinse is enough; they don't need to be spotless.</p></details>
+      <details><summary>What happens to the bottles?</summary><p>The machine sorts plastic and glass. Our team empties it and sells the material to local recyclers.</p></details>
+      <details><summary>What if a machine is full?</summary><p>Check the fill level in the Machines section before you go. A machine that's almost full is emptied within 24 hours.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><span>REVA · Recycle. Earn. Transform.</span><span>School project · Zacatecas, Mexico. Points, partners and fill levels are examples.</span></div>
+</footer>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const VAL={pet:{pts:10,name:'Plastic bottle'},glass:{pts:15,name:'Glass bottle'}};
+const REWARDS=[
+  {name:'Coffee',where:'Partner café downtown',cost:100,ico:'☕'},
+  {name:'10% off',where:'Partner sports store',cost:150,ico:'%'},
+  {name:'Ice cream scoop',where:'Partner ice cream shop',cost:200,ico:'🍦'},
+  {name:'2-for-1 movie',where:'Partner cinema',cost:300,ico:'2×1'}
+];
+const SPOTS=[
+  {name:'UAZ · Campus Siglo XXI',short:'UAZ Siglo XXI',kind:'University',fill:42,lat:22.7708615,lng:-102.6439208,pid:'ChIJr9NKYfJRgoYRC8uDfpY1bdI'},
+  {name:'Instituto Tecnológico de Zacatecas',short:'Tec de Zacatecas',kind:'University',fill:67,lat:22.7757644,lng:-102.627005,pid:'ChIJheUiG_xRgoYREm-u3MelvcA'},
+  {name:'Galerías Zacatecas',short:'Galerías',kind:'Shopping mall',fill:83,lat:22.7768874,lng:-102.5977617,pid:'ChIJk-i4N3NOgoYR3dPD41vdf2o'},
+  {name:'Plaza Bicentenario',short:'Plaza Bicentenario',kind:'Public plaza',fill:28,lat:22.769448,lng:-102.5719039,pid:'ChIJn4mYZYlOgoYRtKhsOUYdSaE'},
+  {name:'Mercado González Ortega',short:'Mercado G. Ortega',kind:'Historic market',fill:55,lat:22.7750913,lng:-102.5726553,pid:'ChIJIxO1LYZOgoYRxGxsctmji2s'}
+];
+// equirectangular projection fitted to the five spots
+const LNG0=-102.655,LNG1=-102.560,KM_PER_DEG=111.32*Math.cos(22.774*Math.PI/180);
+const PXKM=600/((LNG1-LNG0)*KM_PER_DEG);
+const LATC=22.774;
+SPOTS.forEach(s=>{s.x=(s.lng-LNG0)*KM_PER_DEG*PXKM;s.y=170-(s.lat-LATC)*111.32*PXKM;});
+const QUIZ=[
+  {claim:'Glass can only be recycled a few times.',ans:'myth',why:'Glass can be recycled again and again without losing quality.',src:'Glass Packaging Institute, via Republic Services',url:'https://www.republicservices.com/residents/recycling-and-solid-waste/glass'},
+  {claim:'You have to scrub bottles until they are spotless.',ans:'myth',why:'Just empty them. Waste experts say a quick rinse is enough.',src:'HeraldNet, waste-industry experts',url:'https://www.heraldnet.com/news/how-clean-is-clean-enough-for-recyclables-waste-experts-weigh-in'},
+  {claim:'Mexico collects more than half of its plastic bottles.',ans:'fact',why:'About 6 in 10 PET bottles (64%) were collected in 2024.',src:'5th ANNEP report (ECOCE / Semarnat), via Grupo Animal',url:'https://grupoanimal.mx/hablemos-de/mexico-supera-metas-en-reciclaje-y-economia-circular-del-plastico-a-seis-anos-de-la-firma-del-acuerdo-nacional'}
+];
+const $=id=>document.getElementById(id);
+const state={pts:0,log:[]};
+['pet','glass','pet','pet','glass','pet','glass','pet','glass','pet'].forEach(t=>add(t,true));
+
+function add(type,silent){
+  const v=VAL[type];state.pts+=v.pts;state.log.unshift({label:v.name,delta:v.pts});
+  if(!silent){
+    const s=$('screen');s.className='screen'+(type==='glass'?' glass':'');
+    s.innerHTML=`<span class="big">+${v.pts}</span><span class="small">${v.name} accepted · ${state.pts} points</span>`;
+    toast(`+${v.pts} points`);
+  }
+  render();
+}
+function redeem(r){
+  if(state.pts<r.cost)return;
+  state.pts-=r.cost;state.log.unshift({label:'Redeemed: '+r.name,delta:-r.cost});
+  const code='REVA-'+Math.random().toString(36).slice(2,6).toUpperCase();
+  const c=$('code');c.hidden=false;
+  c.innerHTML=`<div class="ticket"><b>${r.name} redeemed</b><span class="tcode">${code}</span><small>Show this code at the ${r.where.toLowerCase()}</small><small>Valid for 24 hours · one use</small></div>`;
+  toast('Reward redeemed');render();
+  try{c.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}
+}
+$('q-pet').addEventListener('click',()=>{add('pet',true);toast('+10 points');});
+$('q-glass').addEventListener('click',()=>{add('glass',true);toast('+15 points');});
+$('q-reset').addEventListener('click',()=>{state.pts=0;state.log=[];['pet','glass','pet','pet','glass','pet','glass','pet','glass','pet'].forEach(t=>add(t,true));$('code').hidden=true;toast('Back to 120 points');});
+function render(){
+  if(!$('pts'))return;
+  $('pts').textContent=state.pts;$('chip-pts').textContent=state.pts;
+  const nxt=REWARDS.find(r=>r.cost>state.pts);
+  const prev=[...REWARDS].reverse().find(r=>r.cost<=state.pts);
+  const lo=prev?prev.cost:0,hi=nxt?nxt.cost:1;
+  $('prog').style.width=nxt?Math.round((state.pts-lo)/(hi-lo)*100)+'%':'100%';
+  $('next').textContent=nxt?`${nxt.cost-state.pts} points to ${nxt.name.toLowerCase()}`:'You can unlock every reward';
+  $('history').innerHTML=state.log.slice(0,10).map(l=>`<li><span>${l.label}</span><span class="mono ${l.delta>0?'plus':'minus'}">${l.delta>0?'+':''}${l.delta}</span></li>`).join('');
+  const box=$('reward-list');box.innerHTML='';
+  REWARDS.forEach(r=>{
+    const d=document.createElement('div');d.className='reward';const miss=r.cost-state.pts;
+    d.innerHTML=`<span class="ico" aria-hidden="true">${r.ico}</span><div><b>${r.name}</b><small>${r.where} · <span class="mono">${r.cost}</span> pts</small></div>`;
+    const b=document.createElement('button');b.type='button';b.textContent=miss>0?`${miss} to go`:'Redeem';b.disabled=miss>0;
+    b.addEventListener('click',()=>redeem(r));d.appendChild(b);box.appendChild(d);
+  });
+}
+function calc(){
+  const p=Math.max(0,parseInt($('c-pet').value)||0),g=Math.max(0,parseInt($('c-glass').value)||0);
+  const pts=p*10+g*15;$('r-pts').textContent=pts;
+  const best=[...REWARDS].reverse().find(r=>r.cost<=pts);
+  const nxt=REWARDS.find(r=>r.cost>pts);
+  $('r-best').textContent=best?best.name:`Not yet: ${nxt.cost-pts} points to ${nxt.name.toLowerCase()}`;
+  $('r-kg').textContent=`About ${(p*.025+g*.35).toFixed(1)} kg kept out of the trash (approx. 25 g per plastic bottle, 350 g per glass bottle).`;
+}
+document.querySelectorAll('.stepper button').forEach(b=>b.addEventListener('click',()=>{const i=$(b.dataset.t);i.value=Math.min(999,Math.max(0,(parseInt(i.value)||0)+parseInt(b.dataset.d)));calc();}));
+['c-pet','c-glass'].forEach(id=>$(id).addEventListener('input',calc));
+
+let score=0,answered=0;
+QUIZ.forEach((q,i)=>{
+  const el=document.createElement('div');el.className='q';
+  el.innerHTML=`<span class="eyebrow" style="color:#555">${i+1} / 3</span><p class="claim">“${q.claim}”</p><div class="opts"><button type="button" data-a="myth">MYTH</button><button type="button" data-a="fact">FACT</button></div><div class="ans-slot"></div>`;
+  el.querySelectorAll('.opts button').forEach(b=>b.addEventListener('click',()=>{
+    const ok=b.dataset.a===q.ans;if(ok)score++;answered++;
+    el.querySelector('.opts').remove();
+    el.querySelector('.ans-slot').innerHTML=`<div class="answer ${q.ans}"><b>${q.ans.toUpperCase()} · ${ok?'You got it':'Not quite'}</b>${q.why}</div><p class="src" style="margin-top:8px">Source: <a href="${q.url}" target="_blank" rel="noopener">${q.src}</a></p>`;
+    $('score').textContent=`Score: ${score} / 3`+(answered===3?(score===3?' · Recycling pro!':' · Now you know.'):'');
+  }));
+  $('quiz-cards').appendChild(el);
+});
+
+const NS='http://www.w3.org/2000/svg';
+function pick(i){
+  document.querySelectorAll('.spot').forEach((s,j)=>s.classList.toggle('on',j===i));
+  document.querySelectorAll('.pin').forEach((p,j)=>p.querySelector('.halo').setAttribute('r',j===i?30:0));
+}
+for(let x=0;x<=600;x+=PXKM){const l=document.createElementNS(NS,'line');l.setAttribute('x1',x);l.setAttribute('x2',x);l.setAttribute('y1',0);l.setAttribute('y2',340);$('grid').appendChild(l);}
+for(let y=170%PXKM;y<=340;y+=PXKM){const l=document.createElementNS(NS,'line');l.setAttribute('x1',0);l.setAttribute('x2',600);l.setAttribute('y1',y);l.setAttribute('y2',y);$('grid').appendChild(l);}
+$('scale').innerHTML=`<rect x="16" y="296" width="${PXKM}" height="6" fill="#3a2218"/><text x="${16+PXKM+8}" y="303" font-family="Manrope, sans-serif" font-size="12" fill="#3a2218">1 km</text>`;
+const LBL=[[0,22],[0,22],[0,22],[0,22],[-10,-44]];
+const mapsUrl=s=>`https://www.google.com/maps/search/?api=1&query=${s.lat},${s.lng}&query_place_id=${s.pid}`;
+SPOTS.forEach((s,i)=>{
+  const g=document.createElementNS(NS,'g');g.setAttribute('class','pin');g.setAttribute('transform',`translate(${s.x.toFixed(1)} ${s.y.toFixed(1)})`);
+  const [lx,ly]=LBL[i];
+  g.innerHTML=`<circle class="halo" cx="0" cy="-26" r="0" fill="#127068" fill-opacity=".2"/><path d="M0 0 C-6 -12 -16 -18 -16 -28 A16 16 0 1 1 16 -28 C16 -18 6 -12 0 0Z" fill="#127068"/><text x="0" y="-23" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="800" font-size="15" fill="#fcf3e8">${i+1}</text><text class="lbl" x="${lx}" y="${ly}" text-anchor="middle">${s.short}</text><title>${s.name}</title>`;
+  g.addEventListener('click',()=>pick(i));$('pins').appendChild(g);
+  const b=document.createElement('div');b.className='spot';b.tabIndex=0;b.setAttribute('role','button');
+  b.innerHTML=`<span class="num">${i+1}</span><span><b>${s.name}</b><small>${s.kind} · <a href="${mapsUrl(s)}" target="_blank" rel="noopener">Open in Google Maps ↗</a></small></span><span class="fill">${s.fill}%<span class="bar" style="display:block"><i class="${s.fill>=80?'hi':''}" style="width:${s.fill}%"></i></span></span>`;
+  b.addEventListener('click',e=>{if(e.target.tagName!=='A')pick(i);});b.addEventListener('keydown',e=>{if(e.key==='Enter')pick(i);});$('spots').appendChild(b);
+});
+pick(0);
+
+$('btn-pet').addEventListener('click',()=>add('pet'));
+$('btn-glass').addEventListener('click',()=>add('glass'));
+$('lead').addEventListener('submit',e=>{
+  e.preventDefault();const n=$('f-name').value.trim(),b=$('f-biz').value.trim(),o=$('sent');o.hidden=false;
+  o.textContent=(!n||!b)?'Enter your name and your business or school.':`Thanks, ${n}. This is a sample school page, so your request isn't sent anywhere.`;
+});
+let tt;function toast(t){const el=$('toast');el.textContent=t;el.hidden=false;clearTimeout(tt);tt=setTimeout(()=>el.hidden=true,1600)}
+render();calc();
+</script>
+
+</body>
+</html>
