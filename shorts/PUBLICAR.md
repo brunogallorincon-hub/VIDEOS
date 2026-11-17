@@ -7,15 +7,16 @@ YouTube Shorts, TikTok e Instagram Reels: tres plataformas, el mismo trabajo.
 
 Los vídeos de "antes de que salga" caducan el día 19, así que esos van primero.
 
-| Día | Vídeo 1 (tarde ~18:00) | Vídeo 2 (noche ~21:00) |
-|---|---|---|
-| **Mar 17 (hoy)** | 01 ¿A qué hora sale? | 09 Haz esto antes del 19 |
-| **Mié 18** | 02 ¿Cuánto ocupa? | 03 Precio |
-| **Jue 19 (lanzamiento)** | 04 ¿Sale en PC? | 10 13 años de espera |
-| Vie 20 | 05 Jason y Lucia | |
-| Sáb 21 | 06 Mapa de Leonida | |
-| Dom 22 | 07 Vuelve Vice City | |
-| Lun 23 | 08 Récords | |
+| Día | Mediodía (~13:00) | Tarde (~18:00) | Noche (~21:00) |
+|---|---|---|---|
+| **Mié 18** (antes de crear nada, crea el canal) | 01 ¿A qué hora sale? | 09 Haz esto antes del 19 | 02 ¿Cuánto ocupa? |
+| **Jue 19 (lanzamiento)** | 03 Precio | 04 ¿Sale en PC? | 10 13 años de espera |
+| Vie 20 | | 05 Jason y Lucia | |
+| Sáb 21 | | 06 Mapa de Leonida | |
+| Dom 22 | | 07 Vuelve Vice City | |
+| Lun 23 | | 08 Récords | |
+
+El miércoles 18 van 3 vídeos porque el 01, el 09 y el 02 dejan de tener sentido cuando sale el juego.
 
 Del 24 en adelante: clips de tus partidas o clipping (ver abajo).
 
