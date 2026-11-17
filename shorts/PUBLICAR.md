@@ -47,8 +47,8 @@ Hashtags para todos: `#gta6 #gtavi #grandtheftauto6 #vicecity #gaming #shorts`
 ### 2. Subir cada vídeo (2 min por plataforma)
 1. Pasa el `short.mp4` al móvil (Google Drive, WhatsApp a ti mismo, o descárgalo de GitHub).
 2. Abre la app, pulsa **+**, elige el vídeo.
-3. **Pon un sonido en tendencia** desde la propia app. Los vídeos vienen sin audio a propósito:
-   así eliges una canción de moda y no tienes problemas de copyright.
+3. Los vídeos ya traen **voz narrada**. Si quieres, añade un sonido en tendencia desde la app
+   y **bájale el volumen al 10-15 %** (en TikTok: "Sonidos" > "Volumen") para que no tape la voz.
 4. Pega el título, la descripción y los hashtags de la tabla de arriba.
 5. Publica.
 

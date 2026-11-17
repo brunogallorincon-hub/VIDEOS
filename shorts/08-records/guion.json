@@ -5,31 +5,37 @@
    "tag": "GTA 6",
    "grande": "RÉCORDS",
    "texto": "Lo que GTA 6 batió\nantes de salir",
-   "dur": 3.4
+   "dur": 3.4,
+   "voz": "Los récords que ge te a seis batió antes de salir."
   },
   {
    "tag": "TRÁILER 1",
    "grande": "93 M",
    "texto": "Visitas en YouTube\nen 24 horas. Récord\npara un vídeo\nno musical",
-   "dur": 5
+   "dur": 5,
+   "voz": "El primer tráiler hizo noventa y tres millones de visitas en YouTube en veinticuatro horas. Récord para un vídeo no musical."
   },
   {
    "tag": "TRÁILER 2",
    "grande": "475 M",
    "texto": "Visualizaciones\nen 24 horas, sumando\ntodas las plataformas",
-   "dur": 5
+   "dur": 5,
+   "voz": "El segundo, cuatrocientos setenta y cinco millones en veinticuatro horas, sumando todas las plataformas."
   },
   {
    "tag": "GTA V",
    "grande": "+200 M",
    "texto": "Copias vendidas\nde GTA V.\nEl listón está\naltísimo",
-   "dur": 4.6
+   "dur": 4.6,
+   "voz": "Y ge te a cinco ha vendido más de doscientos millones de copias. El listón está altísimo."
   },
   {
    "tag": "",
    "grande": "COMENTA",
    "texto": "¿Superará\nGTA 6 a GTA V?",
-   "dur": 3.8
+   "dur": 3.8,
+   "voz": "¿Superará ge te a seis a ge te a cinco?"
   }
- ]
+ ],
+ "voz": "em_alex"
 }

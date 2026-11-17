@@ -5,43 +5,51 @@
    "tag": "GTA 6",
    "grande": "¿A QUÉ HORA SALE?",
    "texto": "Te lo explico\nen 20 segundos",
-   "dur": 3.2
+   "dur": 3.2,
+   "voz": "¿A qué hora sale ge te a seis? Te lo explico en veinte segundos."
   },
   {
    "tag": "FECHA",
    "grande": "19 NOV",
    "texto": "Jueves 19 de noviembre\nde 2026",
-   "dur": 3.8
+   "dur": 3.8,
+   "voz": "Sale el jueves diecinueve de noviembre."
   },
   {
    "tag": "HORA",
    "grande": "00:00",
    "texto": "A medianoche,\nhora LOCAL\nde tu país",
-   "dur": 4.2
+   "dur": 4.2,
+   "voz": "A medianoche, hora local de tu país."
   },
   {
    "tag": "OJO",
    "grande": "",
    "texto": "Asia y Oceanía\nlo juegan primero.\nAmérica, horas\ndespués",
-   "dur": 4.5
+   "dur": 4.5,
+   "voz": "Así que en Asia y Oceanía lo juegan primero, y en América unas horas después."
   },
   {
    "tag": "PRECARGA",
    "grande": "",
    "texto": "La descarga anticipada\nestá abierta desde\nel 10 de noviembre",
-   "dur": 4.5
+   "dur": 4.5,
+   "voz": "La descarga anticipada ya está abierta desde el diez de noviembre."
   },
   {
    "tag": "TRUCO",
    "grande": "",
    "texto": "Descárgalo YA:\nel juego se queda\nbloqueado y se abre\njusto a medianoche",
-   "dur": 4.8
+   "dur": 4.8,
+   "voz": "Truco: descárgalo ya. El juego se queda bloqueado y se abre justo a medianoche."
   },
   {
    "tag": "",
    "grande": "SÍGUEME",
    "texto": "Te cuento todo\nlo de GTA 6\ncada día",
-   "dur": 3.5
+   "dur": 3.5,
+   "voz": "Sígueme y te cuento todo de ge te a seis cada día."
   }
- ]
+ ],
+ "voz": "em_alex"
 }

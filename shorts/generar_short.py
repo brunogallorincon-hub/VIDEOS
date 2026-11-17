@@ -209,9 +209,41 @@ def pegar(frame, im, cx, y, alpha, escala=1.0):
     frame.paste(im, (cx - im.width // 2, int(y)), m)
 
 
+# ---------------------------------------------------------------- voz
+MODELOS = os.environ.get("VOZ_MODELOS", os.path.join(os.path.dirname(os.path.abspath(__file__)), "modelos"))
+
+
+def sintetizar_voz(g, carpeta):
+    """Genera voz.wav con la narración ('voz' de cada slide) y ajusta las duraciones."""
+    if not any(s.get("voz") for s in g["slides"]):
+        return None
+    import numpy as np, soundfile as sf
+    from kokoro_onnx import Kokoro
+    k = Kokoro(os.path.join(MODELOS, "kokoro.onnx"), os.path.join(MODELOS, "voices.bin"))
+    voz, vel = g.get("voz", "em_alex"), g.get("velocidad", 1.12)
+    trozos, sr = [], 24000
+    for s in g["slides"]:
+        if s.get("voz"):
+            a, sr = k.create(s["voz"], voice=voz, speed=vel, lang="es")
+            nz = np.where(np.abs(a) > 0.01)[0]
+            a = a[nz[0]: nz[-1] + 1] if len(nz) else a
+        else:
+            a = np.zeros(0, dtype=np.float32)
+        trozos.append(a)
+        s["dur"] = max(s["dur"] if not s.get("voz") else 0, len(a) / sr + 0.55)
+    pista = np.concatenate([np.concatenate([np.zeros(int(0.12 * sr), np.float32), a,
+                                            np.zeros(int((s["dur"] - 0.12) * sr) - len(a), np.float32)])
+                            for s, a in zip(g["slides"], trozos)])
+    ruta = os.path.join(carpeta, "voz.wav")
+    sf.write(ruta, pista, sr)
+    return ruta
+
+
 # ---------------------------------------------------------------- render
 def render(guion_path, musica=None):
     g = json.load(open(guion_path, encoding="utf-8"))
+    carpeta = os.path.dirname(os.path.abspath(guion_path))
+    voz = sintetizar_voz(g, carpeta)
     tema = g.get("tema", "atardecer")
     T = TEMAS[tema]
     fondo = crear_fondo(tema)
@@ -226,12 +258,21 @@ def render(guion_path, musica=None):
     out = os.path.join(os.path.dirname(os.path.abspath(guion_path)), "short.mp4")
     cmd = ["ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
            "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-"]
-    if musica:
+    if voz and musica:
+        cmd += ["-i", voz, "-stream_loop", "-1", "-i", musica, "-filter_complex",
+                "[1:a]loudnorm=I=-14:TP=-1.5[v];[2:a]volume=0.12[m];[v][m]amix=inputs=2:duration=first:normalize=0[a]"]
+        amap = "[a]"
+    elif voz:
+        cmd += ["-i", voz, "-af", "loudnorm=I=-14:TP=-1.5"]
+        amap = "1:a"
+    elif musica:
         cmd += ["-stream_loop", "-1", "-i", musica]
+        amap = "1:a"
     else:
         cmd += ["-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo"]
-    cmd += ["-map", "0:v", "-map", "1:a", "-t", f"{total:.2f}", "-c:v", "libx264", "-preset", "medium",
-            "-crf", "19", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-shortest",
+        amap = "1:a"
+    cmd += ["-map", "0:v", "-map", amap, "-t", f"{total:.2f}", "-c:v", "libx264", "-preset", "medium",
+            "-crf", "19", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-ar", "44100",
             "-movflags", "+faststart", out]
     ff = subprocess.Popen(cmd, stdin=subprocess.PIPE)
 

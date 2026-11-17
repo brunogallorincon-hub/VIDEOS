@@ -5,37 +5,44 @@
    "tag": "GTA 6",
    "grande": "LEONIDA",
    "texto": "El mapa de GTA 6\nen 30 segundos",
-   "dur": 3.2
+   "dur": 3.2,
+   "voz": "El mapa de ge te a seis en treinta segundos."
   },
   {
    "tag": "QUÉ ES",
    "grande": "",
    "texto": "Leonida es la versión\nde Florida\nde Rockstar",
-   "dur": 4.2
+   "dur": 4.2,
+   "voz": "Leonida es la versión de Florida de Rockstar."
   },
   {
    "tag": "6 ZONAS",
    "grande": "",
    "texto": "Vice City\nLeonida Keys\nGrassrivers\nPort Gellhorn\nAmbrosia\n+ zona de montaña",
-   "dur": 5.8
+   "dur": 5.8,
+   "voz": "Tiene seis zonas: Vice City, Leonida Keys, Grassrivers, Port Gellhorn, Ambrosia, y una zona de montaña."
   },
   {
    "tag": "VICE CITY",
    "grande": "",
    "texto": "La gran ciudad:\nla 'Miami' de GTA",
-   "dur": 4
+   "dur": 4,
+   "voz": "Vice City es la gran ciudad, la Miami de ge te a."
   },
   {
    "tag": "GRASSRIVERS",
    "grande": "",
    "texto": "Pantanos al estilo\nde los Everglades.\nCuidado con\nlos caimanes",
-   "dur": 4.6
+   "dur": 4.6,
+   "voz": "Grassrivers son pantanos al estilo de los Everglades. Cuidado con los caimanes."
   },
   {
    "tag": "",
    "grande": "COMENTA",
    "texto": "¿Qué zona vas\na explorar primero?",
-   "dur": 3.8
+   "dur": 3.8,
+   "voz": "¿Qué zona vas a explorar primero?"
   }
- ]
+ ],
+ "voz": "em_alex"
 }

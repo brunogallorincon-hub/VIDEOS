@@ -5,43 +5,51 @@
    "tag": "GTA 6",
    "grande": "ANTES DEL 19",
    "texto": "5 cosas que tienes\nque hacer YA",
-   "dur": 3.4
+   "dur": 3.4,
+   "voz": "Cinco cosas que tienes que hacer ya, antes de que salga ge te a seis."
   },
   {
    "tag": "#1",
    "grande": "PRECARGA",
    "texto": "Ocupa hasta 212 GB:\nno esperes\nal último día",
-   "dur": 4.2
+   "dur": 4.2,
+   "voz": "Uno: precárgalo. Ocupa hasta doscientos doce gigas, no esperes al último día."
   },
   {
    "tag": "#2",
    "grande": "ESPACIO",
    "texto": "Borra lo que no\njuegues para que\nte quepa",
-   "dur": 3.8
+   "dur": 3.8,
+   "voz": "Dos: libera espacio. Borra lo que no juegues."
   },
   {
    "tag": "#3",
    "grande": "ACTUALIZA",
    "texto": "Pon al día tu\nPS5 o tu Xbox\nantes del 19",
-   "dur": 3.8
+   "dur": 3.8,
+   "voz": "Tres: actualiza tu Pe Ese Cinco o tu Xbox."
   },
   {
    "tag": "#4",
    "grande": "SPOILERS",
    "texto": "Silencia 'GTA 6'\nen tus redes para\nno comerte la historia",
-   "dur": 4.4
+   "dur": 4.4,
+   "voz": "Cuatro: silencia ge te a seis en tus redes, para no comerte la historia."
   },
   {
    "tag": "#5",
    "grande": "DÍA LIBRE",
    "texto": "Pídelo ya.\nEs broma...\n¿o no?",
-   "dur": 3.6
+   "dur": 3.6,
+   "voz": "Cinco: pide el día libre. Es broma... ¿o no?"
   },
   {
    "tag": "",
    "grande": "COMPARTE",
    "texto": "Mándaselo a tu\ncompañero de GTA",
-   "dur": 3.6
+   "dur": 3.6,
+   "voz": "Mándaselo a tu compañero de ge te a."
   }
- ]
+ ],
+ "voz": "em_alex"
 }

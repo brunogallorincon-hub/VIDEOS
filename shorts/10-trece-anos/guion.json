@@ -5,43 +5,51 @@
    "tag": "LA ESPERA",
    "grande": "13 AÑOS",
    "texto": "Desde GTA V\nhasta GTA 6",
-   "dur": 3.5
+   "dur": 3.5,
+   "voz": "Trece años. Desde ge te a cinco hasta ge te a seis."
   },
   {
    "tag": "2013",
    "grande": "GTA V",
    "texto": "Sale el\n17 de septiembre",
-   "dur": 3.8
+   "dur": 3.8,
+   "voz": "En dos mil trece, el diecisiete de septiembre, sale ge te a cinco."
   },
   {
    "tag": "2023",
    "grande": "TRÁILER 1",
    "texto": "Rockstar enseña\nGTA 6 en diciembre",
-   "dur": 3.8
+   "dur": 3.8,
+   "voz": "En diciembre de dos mil veintitrés, Rockstar enseña ge te a seis."
   },
   {
    "tag": "2025",
    "grande": "TRÁILER 2",
    "texto": "Llega el 6 de mayo",
-   "dur": 3.6
+   "dur": 3.6,
+   "voz": "El seis de mayo de dos mil veinticinco, llega el segundo tráiler."
   },
   {
    "tag": "2026",
    "grande": "19 NOV",
    "texto": "Por fin sale\nGTA 6",
-   "dur": 3.6
+   "dur": 3.6,
+   "voz": "Y el diecinueve de noviembre de dos mil veintiséis, por fin sale."
   },
   {
    "tag": "DATO",
    "grande": "",
    "texto": "Es la espera más larga\nentre dos GTA\nprincipales",
-   "dur": 4.2
+   "dur": 4.2,
+   "voz": "Es la espera más larga entre dos ge te a principales."
   },
   {
    "tag": "",
    "grande": "COMENTA",
    "texto": "¿Cuántos años\ntenías cuando\nsalió GTA V?",
-   "dur": 3.8
+   "dur": 3.8,
+   "voz": "¿Cuántos años tenías cuando salió ge te a cinco?"
   }
- ]
+ ],
+ "voz": "em_alex"
 }

@@ -5,31 +5,37 @@
    "tag": "VICE CITY",
    "grande": "24 AÑOS",
    "texto": "Lo que ha tardado\nRockstar en volver\na Vice City",
-   "dur": 3.8
+   "dur": 3.8,
+   "voz": "Veinticuatro años. Es lo que ha tardado Rockstar en volver a Vice City."
   },
   {
    "tag": "ANTES",
    "grande": "2002",
    "texto": "GTA Vice City:\nlos años 80, neón\ny Tommy Vercetti",
-   "dur": 4.6
+   "dur": 4.6,
+   "voz": "En dos mil dos llegó ge te a Vice City: los ochenta, el neón, y Tommy Vercetti."
   },
   {
    "tag": "AHORA",
    "grande": "2026",
    "texto": "GTA 6 vuelve\na Vice City, pero\nen la época actual",
-   "dur": 4.6
+   "dur": 4.6,
+   "voz": "Ahora, ge te a seis vuelve a Vice City, pero en la época actual."
   },
   {
    "tag": "DATO",
    "grande": "1997",
    "texto": "Vice City ya aparecía\nen el primer GTA",
-   "dur": 4.2
+   "dur": 4.2,
+   "voz": "Y un dato: Vice City ya aparecía en el primer ge te a, de mil novecientos noventa y siete."
   },
   {
    "tag": "",
    "grande": "COMENTA",
    "texto": "¿Jugaste al\nVice City original?",
-   "dur": 3.8
+   "dur": 3.8,
+   "voz": "¿Jugaste al Vice City original?"
   }
- ]
+ ],
+ "voz": "em_alex"
 }

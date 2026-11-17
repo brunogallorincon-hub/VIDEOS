@@ -5,37 +5,44 @@
    "tag": "GTA 6",
    "grande": "¿CUÁNTO CUESTA?",
    "texto": "Precio de las\ndos ediciones",
-   "dur": 3.2
+   "dur": 3.2,
+   "voz": "¿Cuánto cuesta ge te a seis?"
   },
   {
    "tag": "ESTÁNDAR",
    "grande": "79,99 $",
    "texto": "Edición estándar\n(precio en EE.UU.)",
-   "dur": 4
+   "dur": 4,
+   "voz": "La edición estándar, setenta y nueve con noventa y nueve dólares en Estados Unidos."
   },
   {
    "tag": "ULTIMATE",
    "grande": "99,99 $",
    "texto": "Edición Ultimate\n(precio en EE.UU.)",
-   "dur": 4
+   "dur": 4,
+   "voz": "La edición Ultimate, noventa y nueve con noventa y nueve."
   },
   {
    "tag": "DATO",
    "grande": "60 $",
    "texto": "Lo que costaba GTA V\nen 2013. GTA 6 es\nel GTA más caro",
-   "dur": 4.8
+   "dur": 4.8,
+   "voz": "Dato: ge te a cinco costaba sesenta dólares en dos mil trece. Este es el ge te a más caro."
   },
   {
    "tag": "TU PAÍS",
    "grande": "",
    "texto": "Precio en tu moneda:\nmíralo en la tienda\nde PlayStation o Xbox",
-   "dur": 4.8
+   "dur": 4.8,
+   "voz": "El precio en tu moneda lo ves en la tienda de PlayStation o de Xbox."
   },
   {
    "tag": "",
    "grande": "COMENTA",
    "texto": "¿Estándar o Ultimate?\n¿Cuál te compras?",
-   "dur": 3.8
+   "dur": 3.8,
+   "voz": "¿Estándar o Ultimate? Comenta cuál te compras."
   }
- ]
+ ],
+ "voz": "em_alex"
 }

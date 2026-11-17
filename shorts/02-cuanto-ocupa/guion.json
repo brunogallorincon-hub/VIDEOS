@@ -5,37 +5,44 @@
    "tag": "GTA 6",
    "grande": "212 GB",
    "texto": "Lo que ocupa GTA 6.\n¿Te cabe en la consola?",
-   "dur": 3.5
+   "dur": 3.5,
+   "voz": "Ge te a seis ocupa hasta doscientos doce gigas. ¿Te cabe en la consola?"
   },
   {
    "tag": "PS5",
    "grande": "667 GB",
    "texto": "Es lo que trae libre\nla PS5 de 825 GB.\nGTA 6 se come\ncasi un tercio",
-   "dur": 5
+   "dur": 5,
+   "voz": "La Pe Ese Cinco de ochocientos veinticinco gigas trae unos seiscientos sesenta y siete libres. Ge te a seis se come casi un tercio."
   },
   {
    "tag": "SERIES S",
    "grande": "364 GB",
    "texto": "Es lo libre en la\nXbox Series S.\nGTA 6 se come\nmás de la mitad",
-   "dur": 5
+   "dur": 5,
+   "voz": "La Xbox Series Ese tiene unos trescientos sesenta y cuatro gigas libres. Se come más de la mitad."
   },
   {
    "tag": "SERIES X",
    "grande": "802 GB",
    "texto": "Libres en la\nXbox Series X.\nCabe sin problema",
-   "dur": 4.2
+   "dur": 4.2,
+   "voz": "En la Xbox Series Equis tienes unos ochocientos dos. Cabe sin problema."
   },
   {
    "tag": "TRUCO",
    "grande": "",
    "texto": "¿No te cabe?\nBorra juegos viejos\no amplía con un SSD\ncompatible",
-   "dur": 4.8
+   "dur": 4.8,
+   "voz": "¿No te cabe? Borra juegos viejos o amplía con un disco compatible."
   },
   {
    "tag": "",
    "grande": "COMENTA",
    "texto": "¿Ya lo tienes\ndescargado?",
-   "dur": 3.5
+   "dur": 3.5,
+   "voz": "Comenta: ¿ya lo tienes descargado?"
   }
- ]
+ ],
+ "voz": "em_alex"
 }
