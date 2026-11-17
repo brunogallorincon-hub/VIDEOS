@@ -1,0 +1,35 @@
+{
+ "tema": "atardecer",
+ "slides": [
+  {
+   "tag": "VICE CITY",
+   "grande": "24 AÑOS",
+   "texto": "Lo que ha tardado\nRockstar en volver\na Vice City",
+   "dur": 3.8
+  },
+  {
+   "tag": "ANTES",
+   "grande": "2002",
+   "texto": "GTA Vice City:\nlos años 80, neón\ny Tommy Vercetti",
+   "dur": 4.6
+  },
+  {
+   "tag": "AHORA",
+   "grande": "2026",
+   "texto": "GTA 6 vuelve\na Vice City, pero\nen la época actual",
+   "dur": 4.6
+  },
+  {
+   "tag": "DATO",
+   "grande": "1997",
+   "texto": "Vice City ya aparecía\nen el primer GTA",
+   "dur": 4.2
+  },
+  {
+   "tag": "",
+   "grande": "COMENTA",
+   "texto": "¿Jugaste al\nVice City original?",
+   "dur": 3.8
+  }
+ ]
+}

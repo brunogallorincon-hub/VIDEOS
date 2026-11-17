@@ -1,0 +1,47 @@
+{
+ "tema": "noche",
+ "slides": [
+  {
+   "tag": "GTA 6",
+   "grande": "¿SALE EN PC?",
+   "texto": "¿Y en PS4?\n¿Y en Xbox One?",
+   "dur": 3.2
+  },
+  {
+   "tag": "SÍ",
+   "grande": "PS5 + SERIES",
+   "texto": "PS5 y PS5 Pro\nXbox Series X\nXbox Series S",
+   "dur": 4.5
+  },
+  {
+   "tag": "NO",
+   "grande": "PS4 / ONE",
+   "texto": "No hay versión\npara PS4\nni para Xbox One",
+   "dur": 4.2
+  },
+  {
+   "tag": "PC",
+   "grande": "SIN FECHA",
+   "texto": "Rockstar todavía\nno ha anunciado\nla versión de PC",
+   "dur": 4.2
+  },
+  {
+   "tag": "HISTORIA",
+   "grande": "19 MESES",
+   "texto": "Lo que tardó\nGTA V en llegar\na PC",
+   "dur": 4
+  },
+  {
+   "tag": "HISTORIA",
+   "grande": "1 AÑO",
+   "texto": "Lo que tardó\nRed Dead Redemption 2\nen llegar a PC",
+   "dur": 4
+  },
+  {
+   "tag": "",
+   "grande": "SÍGUEME",
+   "texto": "Te aviso el día\nque anuncien\nGTA 6 en PC",
+   "dur": 3.5
+  }
+ ]
+}

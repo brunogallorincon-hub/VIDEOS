@@ -1,0 +1,41 @@
+{
+ "tema": "noche",
+ "slides": [
+  {
+   "tag": "GTA 6",
+   "grande": "212 GB",
+   "texto": "Lo que ocupa GTA 6.\n¿Te cabe en la consola?",
+   "dur": 3.5
+  },
+  {
+   "tag": "PS5",
+   "grande": "667 GB",
+   "texto": "Es lo que trae libre\nla PS5 de 825 GB.\nGTA 6 se come\ncasi un tercio",
+   "dur": 5
+  },
+  {
+   "tag": "SERIES S",
+   "grande": "364 GB",
+   "texto": "Es lo libre en la\nXbox Series S.\nGTA 6 se come\nmás de la mitad",
+   "dur": 5
+  },
+  {
+   "tag": "SERIES X",
+   "grande": "802 GB",
+   "texto": "Libres en la\nXbox Series X.\nCabe sin problema",
+   "dur": 4.2
+  },
+  {
+   "tag": "TRUCO",
+   "grande": "",
+   "texto": "¿No te cabe?\nBorra juegos viejos\no amplía con un SSD\ncompatible",
+   "dur": 4.8
+  },
+  {
+   "tag": "",
+   "grande": "COMENTA",
+   "texto": "¿Ya lo tienes\ndescargado?",
+   "dur": 3.5
+  }
+ ]
+}

@@ -1,0 +1,41 @@
+{
+ "tema": "playa",
+ "slides": [
+  {
+   "tag": "GTA 6",
+   "grande": "¿CUÁNTO CUESTA?",
+   "texto": "Precio de las\ndos ediciones",
+   "dur": 3.2
+  },
+  {
+   "tag": "ESTÁNDAR",
+   "grande": "79,99 $",
+   "texto": "Edición estándar\n(precio en EE.UU.)",
+   "dur": 4
+  },
+  {
+   "tag": "ULTIMATE",
+   "grande": "99,99 $",
+   "texto": "Edición Ultimate\n(precio en EE.UU.)",
+   "dur": 4
+  },
+  {
+   "tag": "DATO",
+   "grande": "60 $",
+   "texto": "Lo que costaba GTA V\nen 2013. GTA 6 es\nel GTA más caro",
+   "dur": 4.8
+  },
+  {
+   "tag": "TU PAÍS",
+   "grande": "",
+   "texto": "Precio en tu moneda:\nmíralo en la tienda\nde PlayStation o Xbox",
+   "dur": 4.8
+  },
+  {
+   "tag": "",
+   "grande": "COMENTA",
+   "texto": "¿Estándar o Ultimate?\n¿Cuál te compras?",
+   "dur": 3.8
+  }
+ ]
+}
