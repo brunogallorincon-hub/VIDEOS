@@ -9,7 +9,7 @@ Los vídeos de "antes de que salga" caducan el día 19, así que esos van primer
 
 | Día | Mediodía (~13:00) | Tarde (~18:00) | Noche (~21:00) |
 |---|---|---|---|
-| **Mié 18** (antes de crear nada, crea el canal) | 01 ¿A qué hora sale? | 09 Haz esto antes del 19 | 02 ¿Cuánto ocupa? |
+| **Mié 18** (por la mañana, crea el canal) | 01 ¿A qué hora sale? | 09 Haz esto antes del 19 | 02 ¿Cuánto ocupa? |
 | **Jue 19 (lanzamiento)** | 03 Precio | 04 ¿Sale en PC? | 10 13 años de espera |
 | Vie 20 | | 05 Jason y Lucia | |
 | Sáb 21 | | 06 Mapa de Leonida | |
